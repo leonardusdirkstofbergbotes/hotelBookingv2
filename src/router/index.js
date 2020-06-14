@@ -22,7 +22,7 @@ Vue.use(VueRouter)
     component: BrowseHotels
   },
   {
-    path: '/hotel',
+    path: '/hotel/:id',
     name: 'Hotel',
     component: Hotel
   },

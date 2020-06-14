@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container id="searchBar">
+    <v-container>
       <v-layout justify-center row wrap class="mb-4 pa-4">
         <v-flex xs12> <!-- Heading -->
           <h1 class="display-3">Search for a hotel</h1>
@@ -71,7 +71,7 @@
           <v-text-field label="Adults"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2 class="my-auto">
-          <v-btn block class="primary">Book</v-btn>
+          <v-btn router to="/browse" block x-large class="primary">Book</v-btn>
         </v-flex>
       </v-layout>
       
@@ -103,11 +103,8 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn color="orange" text>
-                Share
-              </v-btn>
 
-              <v-btn color="orange" text>
+              <v-btn @click="viewHotel('01')" color="orange" text>
                 Explore
               </v-btn>
             </v-card-actions>
@@ -181,6 +178,12 @@
     data: () => ({
       
     }),
+
+    methods: {
+      viewHotel (id) {
+        this.$router.push('/hotel/' + id)
+      }
+    }
   }
 </script>
 
