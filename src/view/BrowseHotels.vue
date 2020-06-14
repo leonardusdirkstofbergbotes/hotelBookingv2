@@ -13,7 +13,7 @@
             <h2 class="display-3">{{hotel.name}}</h2>
             <h5 class="subheading">{{hotel.info}}</h5>
             <v-layout justify-end>
-              <v-btn to="/hotel/01" @click="viewHotel(hotel.id)">View</v-btn>
+              <v-btn @click="viewHotel(hotel.id)">View</v-btn>
             </v-layout>
           </v-flex>
 
