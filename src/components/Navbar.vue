@@ -18,7 +18,7 @@
         </v-btn>
 
         <v-btn text router to="/signup">
-            <v-icon left>fa-user</v-icon>
+            <v-icon left>fa-user-plus</v-icon>
             Sign up
         </v-btn>
 

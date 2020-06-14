@@ -86,7 +86,7 @@
           <h1 class="display-3">Explore our top rated hotels</h1> 
         </v-flex>
       </v-layout>
-
+      
       <v-layout row wrap>
         <v-flex xs12 lg4 class="mb-4">
           <v-card class="mx-auto" max-width="290">
@@ -97,13 +97,13 @@
             </v-img>
 
             <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-
+            
             <v-card-text class="text--primary">
               <div>Whitehaven Beach</div>
 
               <div>Whitsunday Island, Whitsunday Islands</div>
             </v-card-text>
-
+            
             <v-card-actions>
 
               <v-btn @click="viewHotel('01')" color="orange" text>
