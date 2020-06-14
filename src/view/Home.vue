@@ -1,16 +1,16 @@
 <template>
   <div>
     <v-container>
-      <v-layout justify-center row wrap class="mb-4 pa-4">
+      <v-layout justify-center row wrap class="mb-1 pa-4">
         <v-flex xs12> <!-- Heading -->
           <h1 class="display-3">Search for a hotel</h1>
           <h5 class="subheading">Search the top cities</h5>
         </v-flex>
       </v-layout>
 
-      <v-layout justify-space-between row wrap class="grey lighten-4 pa-4 rounded-lg"> <!-- Search bar -->
+      <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-4> <!-- Search bar -->
         <v-flex xs12 lg3>
-          <v-text-field label="Location"></v-text-field>
+          <v-text-field label="Location" prepend-inner-icon="mdi-map-marker"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2>
           <v-menu
@@ -25,7 +25,8 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="date1"
-                label="Book in date"
+                prepend-inner-icon="fa-calendar-check"
+                label="Check in"
                 readonly
                 v-bind="attrs"
                 v-on="on"
@@ -50,8 +51,9 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
+                prepend-inner-icon="fa-calendar-minus"
                 v-model="date2"
-                label="Book in date"
+                label="Check out"
                 readonly
                 v-bind="attrs"
                 v-on="on"
@@ -65,21 +67,21 @@
           </v-menu>
         </v-flex>
         <v-flex xs12 lg1>
-          <v-text-field label="Children"></v-text-field>
+          <v-text-field label="Children" prepend-inner-icon="fa-child"></v-text-field>
         </v-flex>
         <v-flex xs12 lg1>
-          <v-text-field label="Adults"></v-text-field>
+          <v-text-field label="Adults" prepend-inner-icon="fa-male"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2 class="my-auto">
           <v-btn router to="/browse" block x-large class="primary">Book</v-btn>
         </v-flex>
       </v-layout>
       
-    </v-container> <!-- Searchbar with heading -->
+    </v-container>
 
-    <v-container> <!-- top rated hotels wrapper -->
+    <v-container class="my-9"> <!-- top rated hotels wrapper -->
 
-      <v-layout row justify-center class="mb-4 mt-6"> <!-- Heading -->
+      <v-layout row justify-center class="mb-6"> <!-- Heading -->
         <v-flex xs12 style="text-align: center;">
           <h1 class="display-3">Explore our top rated hotels</h1> 
         </v-flex>

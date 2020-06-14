@@ -1,16 +1,23 @@
 <template>
-    <v-footer padless>
-        
-        <v-card flat tile width="100%">
+    <v-footer dark padless>
+    <v-card flat tile class="grey lighten-2 white--text text-center">
+      <v-card-text>
+        <v-btn text class="primary--text">
+          Home
+        </v-btn>
+      </v-card-text>
 
-            <v-divider></v-divider>
+      <v-card-text class="grey--text pt-0" id="here">
+        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+      </v-card-text>
 
-            <v-col class="grey lighten-2 py-4 text-center white--text" cols="12">
-                {{ new Date().getFullYear() }} — <strong>Leonardus Botes</strong>
-            </v-col>
-      </v-card>
+      <v-divider></v-divider>
 
-    </v-footer>
+      <v-card-text class="grey--text">
+        {{ new Date().getFullYear() }} — <strong>Leonardus Botes</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
 </template>
 
 <script>
