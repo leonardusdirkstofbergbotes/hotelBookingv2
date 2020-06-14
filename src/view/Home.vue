@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-container id="searchBar"> <!-- Searchbar -->
-      <v-layout justify-center row wrap>
+    <v-container id="searchBar">
+      <v-layout justify-center row wrap class="mb-4 pa-4">
         <v-flex xs12> <!-- Heading -->
           <h1 class="display-3">Search for a hotel</h1>
           <h5 class="subheading">Search the top cities</h5>
         </v-flex>
       </v-layout>
 
-      <v-layout justify-space-between row wrap>
+      <v-layout justify-space-between row wrap class="grey lighten-4 pa-4 rounded-lg"> <!-- Search bar -->
         <v-flex xs12 lg3>
           <v-text-field label="Location"></v-text-field>
         </v-flex>
@@ -70,11 +70,106 @@
         <v-flex xs12 lg1>
           <v-text-field label="Adults"></v-text-field>
         </v-flex>
-        <v-flex xs12 lg2>
+        <v-flex xs12 lg2 class="my-auto">
           <v-btn block class="primary">Book</v-btn>
         </v-flex>
       </v-layout>
       
+    </v-container> <!-- Searchbar with heading -->
+
+    <v-container> <!-- top rated hotels wrapper -->
+
+      <v-layout row justify-center class="mb-4 mt-6"> <!-- Heading -->
+        <v-flex xs12 style="text-align: center;">
+          <h1 class="display-3">Explore our top rated hotels</h1> 
+        </v-flex>
+      </v-layout>
+
+      <v-layout row wrap>
+        <v-flex xs12 lg4 class="mb-4">
+          <v-card class="mx-auto" max-width="290">
+            <v-img class="white--text align-end" height="200px"
+              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            >
+              <v-card-title>Top 10 Australian beaches</v-card-title>
+            </v-img>
+
+            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+
+            <v-card-text class="text--primary">
+              <div>Whitehaven Beach</div>
+
+              <div>Whitsunday Island, Whitsunday Islands</div>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn color="orange" text>
+                Share
+              </v-btn>
+
+              <v-btn color="orange" text>
+                Explore
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+
+        <v-flex xs12 lg4 class="mb-4">
+          <v-card class="mx-auto" max-width="290">
+            <v-img class="white--text align-end" height="200px"
+              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            >
+              <v-card-title>Top 10 Australian beaches</v-card-title>
+            </v-img>
+
+            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+
+            <v-card-text class="text--primary">
+              <div>Whitehaven Beach</div>
+
+              <div>Whitsunday Island, Whitsunday Islands</div>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn color="orange" text>
+                Share
+              </v-btn>
+
+              <v-btn color="orange" text>
+                Explore
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+
+        <v-flex xs12 lg4 class="mb-4">
+          <v-card class="mx-auto" max-width="290">
+            <v-img class="white--text align-end" height="200px"
+              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            >
+              <v-card-title>Top 10 Australian beaches</v-card-title>
+            </v-img>
+
+            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+
+            <v-card-text class="text--primary">
+              <div>Whitehaven Beach</div>
+
+              <div>Whitsunday Island, Whitsunday Islands</div>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn color="orange" text>
+                Share
+              </v-btn>
+
+              <v-btn color="orange" text>
+                Explore
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </v-container>
   </div>
 </template>
