@@ -17,13 +17,15 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/browse',
+    path: '/browse/:location',
     name: 'Browse',
+    props: true,
     component: BrowseHotels
   },
   {
     path: '/hotel/:id',
     name: 'Hotel',
+    props: true,
     component: Hotel
   },
   {

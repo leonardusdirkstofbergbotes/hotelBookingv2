@@ -10,7 +10,7 @@
 
       <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-4> <!-- Search bar -->
         <v-flex xs12 lg3>
-          <v-text-field label="Location" prepend-inner-icon="mdi-map-marker"></v-text-field>
+          <v-text-field v-model="location.name" label="Location" prepend-inner-icon="mdi-map-marker"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2>
           <v-menu
@@ -73,7 +73,7 @@
           <v-text-field label="Adults" prepend-inner-icon="fa-male"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2 class="my-auto">
-          <v-btn router to="/browse" block x-large class="primary">Book</v-btn>
+          <v-btn router :to="'/browse/' + location.name" block x-large class="primary">Book</v-btn>
         </v-flex>
       </v-layout>
       
@@ -175,16 +175,18 @@
 
 <script>
   export default {
-    name: 'home',
-
-    data: () => ({
-      
-    }),
-
+    data() {
+      return {
+      location: {
+        name: ''
+      }
+    }
+    },
     methods: {
       viewHotel (id) {
         this.$router.push('/hotel/' + id)
-      }
+      },
+
     }
   }
 </script>
