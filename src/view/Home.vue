@@ -8,23 +8,22 @@
         </v-flex>
       </v-layout>
 
-      <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-4> <!-- Search bar -->
+      <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-10> <!-- Search bar -->
         <v-flex xs12 lg3>
-          <v-text-field v-model="location.name" label="Location" prepend-inner-icon="mdi-map-marker"></v-text-field>
+          <v-text-field v-model="location" label="Location" prepend-inner-icon="mdi-map-marker"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2>
           <v-menu
             ref="menu1"
-            v-model="menu1"
             :close-on-content-click="false"
-            :return-value.sync="date1"
+            :return-value.sync="dateIn"
             transition="scale-transition"
             offset-y
             min-width="290px"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date1"
+                v-model="dateIn"
                 prepend-inner-icon="fa-calendar-check"
                 label="Check in"
                 readonly
@@ -32,19 +31,18 @@
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker v-model="date1" no-title scrollable color="primary">
+            <v-date-picker v-model="dateIn" no-title scrollable color="primary">
               <v-spacer></v-spacer>
               <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
-              <v-btn text color="primary" @click="$refs.menu1.save(date1)">OK</v-btn>
+              <v-btn text color="primary" @click="$refs.menu1.save(dateIn)">OK</v-btn>
             </v-date-picker>
           </v-menu>
         </v-flex>
         <v-flex xs12 lg2>
           <v-menu
             ref="menu2"
-            v-model="menu2"
             :close-on-content-click="false"
-            :return-value.sync="date2"
+            :return-value.sync="dateOut"
             transition="scale-transition"
             offset-y
             min-width="290px"
@@ -52,28 +50,28 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 prepend-inner-icon="fa-calendar-minus"
-                v-model="date2"
+                v-model="dateOut"
                 label="Check out"
                 readonly
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker v-model="date2" no-title scrollable color="primary">
+            <v-date-picker v-model="dateOut" no-title scrollable color="primary">
               <v-spacer></v-spacer>
               <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
-              <v-btn text color="primary" @click="$refs.menu2.save(date2)">OK</v-btn>
+              <v-btn text color="primary" @click="$refs.menu2.save(dateOut)">OK</v-btn>
             </v-date-picker>
           </v-menu>
         </v-flex>
         <v-flex xs12 lg1>
-          <v-text-field label="Children" prepend-inner-icon="fa-child"></v-text-field>
+          <v-text-field label="Children" v-model="children" prepend-inner-icon="fa-child" type="number"></v-text-field>
         </v-flex>
         <v-flex xs12 lg1>
-          <v-text-field label="Adults" prepend-inner-icon="fa-male"></v-text-field>
+          <v-text-field label="Adults" prepend-inner-icon="fa-male" v-model="adults" type="number"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2 class="my-auto">
-          <v-btn router :to="'/browse/' + location.name" block x-large class="primary">Book</v-btn>
+          <v-btn router :to="'/browse/' + location" block x-large class="primary">Book</v-btn>
         </v-flex>
       </v-layout>
       
@@ -170,6 +168,21 @@
         </v-flex>
       </v-layout>
     </v-container>
+
+    <v-container>
+
+      <v-layout justify-center row wrap class="mb-1 pa-4">
+          <v-flex xs12 class="mx-10"> <!-- Heading -->
+            <h1 class="display-3">Browse the top cities</h1>
+          </v-flex>
+        </v-layout>
+
+      <v-layout row wrap class="text-center mx-10 mb-15 rounded-lg"  elevation-4> 
+          <v-flex v-for="area in locations" :key="area" xs6 sm4 md3 lg3 class="py-4">
+            {{area}}
+          </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -177,9 +190,14 @@
   export default {
     data() {
       return {
-      location: {
-        name: ''
-      }
+      location: '',
+      children: 0,
+      adults: 1,
+      dateIn: '',
+      dateOut: '',
+      locations: [
+        'Johannesburg', 'Bloemfontein', 'Pretoria', 'Cape Town', 'Port Elizabeth', 'Middelburg', 'George', 'Durban'
+      ]
     }
     },
     methods: {

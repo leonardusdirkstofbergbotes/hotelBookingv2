@@ -26,6 +26,7 @@
                           readonly
                           background-color="grey lighten-2"
                           color="yellow accent-3"
+                          size="35"
                         ></v-rating>
                       
                   </v-layout>
@@ -46,7 +47,7 @@
                         </v-flex>
                           
                         <v-layout xs12 md12 lg4 justify-end> 
-                          <v-btn :to="'/hotel/' + hotel.id">View</v-btn>
+                          <v-btn color="primary" :to="'/hotel/' + hotel.id">View</v-btn>
                         </v-layout>
                     </v-layout>
                 

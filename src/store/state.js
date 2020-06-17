@@ -31,7 +31,16 @@ export const store = new Vuex.Store({
                 {url: 'https://www.saltrockbeach.co.za/wp-content/uploads/2018/04/Lounge-003.jpg'},
                 {url: 'https://images.daznservices.com/di/library/Goal_Turkey/e/d4/pestana-cr7-hotel_1kdnccu7lxby51mps8qi7ym7ym.jpg?t=415565470&w=1920&h=1080'}
             ]}
-        ]
+        ], // Hotels array ENDS
+
+        status: {
+            location: '',
+            inDate: '',
+            outDate: '',
+            children: '',
+            adults: ''
+        }
+
     },
     mutations: {},
     actions: {},
