@@ -7,7 +7,7 @@
           <h5 class="subheading">Search the top cities</h5>
         </v-flex>
       </v-layout>
-
+    <v-form @submit.prevent="handleSearch">
       <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-10> <!-- Search bar -->
         <v-flex xs12 lg3>
           <v-text-field v-model="location" label="Location" prepend-inner-icon="mdi-map-marker"></v-text-field>
@@ -71,9 +71,10 @@
           <v-text-field label="Adults" prepend-inner-icon="fa-male" v-model="adults" type="number"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2 class="my-auto">
-          <v-btn router :to="'/browse/' + location" block x-large class="primary">Book</v-btn>
+          <v-btn router  type="submit" block x-large class="primary">Book</v-btn>
         </v-flex>
       </v-layout>
+    </v-form>
       
     </v-container>
 
@@ -201,6 +202,20 @@
     }
     },
     methods: {
+      handleSearch () {
+        console.log('clicked')
+        const searchData = {
+          location: this.location,
+          children: this.children,
+          adults: this.adults,
+          dateIn: this.dateIn,
+          dateOut: this.dateOut
+        }
+
+        this.$store.dispatch('updateStatus', searchData)
+        this.$router.push('/browse/' + this.location)
+      },
+
       viewHotel (id) {
         this.$router.push('/hotel/' + id)
       },

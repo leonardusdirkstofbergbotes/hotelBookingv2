@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-form>
+        <v-form @submit.prevent="handleSignUp">
             <v-layout column class="pa-2">
 
                 <v-flex xs12>
@@ -52,8 +52,8 @@ export default {
     },
 
     methods: {
-        onSignUp () {
-            
+        handleSignUp () {
+            console.log({'Email': this.userEmail, 'Name': this.userName, 'Password': this.userPassword})
         }
     }
 }

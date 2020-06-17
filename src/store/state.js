@@ -33,17 +33,27 @@ export const store = new Vuex.Store({
             ]}
         ], // Hotels array ENDS
 
-        status: {
-            location: '',
-            inDate: '',
-            outDate: '',
-            children: '',
-            adults: ''
-        }
+        status: []
 
     },
-    mutations: {},
-    actions: {},
+    mutations: {
+        updateStatus (state, payload) {
+            state.status.push(payload)
+        }
+    },
+    actions: {
+        updateStatus ({commit}, payload) {
+            const info = {
+                location: payload.location,
+                children: payload.children,
+                adults: payload.adults,
+                dateIn: payload.dateIn,
+                dateOut: payload.dateOut
+            }
+
+            commit('updateStatus', info)
+        }
+    },
     getters: {
         hotelArr (state) {
             return state.hotels
