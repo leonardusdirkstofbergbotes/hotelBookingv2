@@ -213,6 +213,7 @@
         }
 
         this.$store.dispatch('updateStatus', searchData)
+        window.scrollTo(0, 0)
         this.$router.push('/browse/' + this.location)
       },
 
