@@ -38,6 +38,7 @@ export const store = new Vuex.Store({
     },
     mutations: {
         updateStatus (state, payload) {
+            state.status.length = 0 // empties the array
             state.status.push(payload)
         }
     },
