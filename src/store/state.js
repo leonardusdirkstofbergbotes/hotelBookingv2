@@ -59,6 +59,10 @@ export const store = new Vuex.Store({
             return state.hotels
         },
 
+        getStatus (state) {
+            return state.status
+        },
+
         hotelLoc (state) {
             return (loc) => {
                 return state.hotels.filter((hotel) => {

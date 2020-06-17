@@ -1,5 +1,8 @@
 <template>
     <v-container>
+      <v-flex v-for="item in status" :key="item">
+        {{item}}
+      </v-flex>
         <v-layout xs12 row wrap class="grey lighten-4 rounded-lg pa-3 my-4" v-for="hotel in getHotels" :key="hotel.id"> <!-- Individual hotel wrapper -->
           <v-flex xs12 md6 lg3> <!-- Image of the hotel -->
              <v-img class="white--text align-end"
@@ -63,6 +66,11 @@
   export default {
     props: ['location'],
     computed: {
+
+      status () {
+        return this.$store.getters.getStatus
+      },
+
       getHotels () {
         return this.$store.getters.hotelLoc(this.location)
       }
