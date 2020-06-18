@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
+        loading: false,
         hotels: [
             {location: 'Johannesburg', rating: 2, price: 400,  name: 'Raddison Hotel', info: 'blah blah blah', imageSrc: 'https://cdn.vuetifyjs.com/images/cards/docks.jpg', id: '01', carouselItems: [
                 {url: 'https://q-cf.bstatic.com/images/hotel/max1024x768/210/210996409.jpg'},
@@ -50,10 +51,15 @@ export const store = new Vuex.Store({
         addUser (state, payload) {
             state.user.length = 0
             state.user.push(payload)
+        },
+
+        setLoading (state, payload) {
+            state.loading = payload
         }
     },
     actions: {
         updateStatus ({commit}, payload) {
+            commit('setLoading', true)
             const info = {
                 location: payload.location,
                 children: payload.children,
@@ -62,9 +68,11 @@ export const store = new Vuex.Store({
                 dateOut: payload.dateOut
             }
             commit('updateStatus', info)
+            commit('setLoading', false)
         },
 
         signIn ({commit}, payload) {
+            commit('setLoading', true)
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
                 .then(response => {
                     const signUser  = {
@@ -75,13 +83,16 @@ export const store = new Vuex.Store({
                             console.log(snapshot.key)
                         })
                     // commit('addUser', signUser)
+                    commit('setLoading', false)
                 }).catch(error =>{
                     console.log(error)
+                    commit('setLoading', true)
                 })
                 
         },
 
         addUser ({commit}, payload) {
+            commit('setLoading', true)
             firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
                 .then(response => {
                     const newUser = {
@@ -93,12 +104,15 @@ export const store = new Vuex.Store({
                         .then(response => {
                             console.log(response)
                             commit('addUser', newUser)
+                            commit('setLoading', false)
                         }).catch(error => {
                             console.log(error)
+                            commit('setLoading', false)
                         })
                     
                 }).catch(error => {
                     console.log(error)
+                    commit('setLoading', false)
                 })
         }
     },
@@ -113,6 +127,10 @@ export const store = new Vuex.Store({
 
         getStatus (state) {
             return state.status
+        },
+
+        loading (state) {
+            return state.loading
         },
 
         hotelLoc (state) {

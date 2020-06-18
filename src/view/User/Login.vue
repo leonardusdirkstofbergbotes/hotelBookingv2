@@ -2,7 +2,8 @@
     <v-container>
         <v-form @submit.prevent="handleLogin">
             <v-layout column class="pa-2">
-
+                <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
+                </v-progress-circular>
                 <v-flex xs12>
                     <v-text-field
                         name="email"
@@ -44,7 +45,11 @@ export default {
     computed: {
         user() {
             return this.$store.getters.getUser
-        }
+        },
+
+        loading () {
+        return this.$store.getters.loading
+      }
     },
 
     watch: {
