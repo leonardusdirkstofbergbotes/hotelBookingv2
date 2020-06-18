@@ -17,17 +17,54 @@
             Contact us
         </v-btn>
 
-        <v-btn text router to="/signup">
+        <v-btn text router to="/signup" v-if="loggedIn === false">
             <v-icon left>fa-user-plus</v-icon>
             Sign up
         </v-btn>
 
-        <v-btn text router to="/login">
+        <v-btn text router to="/login" v-if="loggedIn === false">
             <v-icon left>fa-user-check</v-icon>
             Login
+        </v-btn>
+
+        <v-btn text @click="logOut" v-if="loggedIn === true">
+            <v-icon left>fa-sign-out-alt</v-icon>
+            Logout
         </v-btn>
 
         </v-toolbar-items>
     
     </v-app-bar>
 </template>
+
+<script>
+export default {
+    data () {
+        return {
+            loggedIn: false
+        }
+    },
+    computed: {
+        signedIn () {
+            return this.$store.getters.signed
+        }
+    },
+
+    watch: {
+        signedIn (value) {
+            console.log(value)
+            if (value != null) {
+                this.loggedIn = true
+            } else if (value === null) {
+                this.loggedIn = false
+            }
+        }
+    },
+
+    methods: {
+        logOut() {
+            this.$store.dispatch('logout')
+        }
+    }
+}
+</script>

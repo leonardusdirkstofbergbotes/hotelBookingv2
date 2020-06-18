@@ -1,7 +1,9 @@
 <template>
   <div>
+
     <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
-    </v-progress-circular>
+    </v-progress-circular> <!-- Loading circle -->
+
     <v-container>
       <v-layout justify-center row wrap class="mb-1 pa-4">
         <v-flex xs12> <!-- Heading -->
@@ -9,71 +11,51 @@
           <h5 class="subheading">Search the top cities</h5>
         </v-flex>
       </v-layout>
+
     <v-form @submit.prevent="handleSearch">
       <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-10> <!-- Search bar -->
-        <v-flex xs12 lg3>
-          <v-text-field v-model="location" label="Location" prepend-inner-icon="mdi-map-marker"></v-text-field>
+        
+        <v-flex xs12 lg3> <!-- Search location -->
+          <v-autocomplete v-model="location" :items="locations" label="Location" prepend-inner-icon="mdi-map-marker"></v-autocomplete>
         </v-flex>
         <v-flex xs12 lg2>
-          <v-menu
-            ref="menu1"
-            :close-on-content-click="false"
-            :return-value.sync="dateIn"
-            transition="scale-transition"
-            offset-y
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="dateIn"
-                prepend-inner-icon="fa-calendar-check"
-                label="Check in"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="dateIn" no-title scrollable color="primary">
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu1 = false">Cancel</v-btn>
-              <v-btn text color="primary" @click="$refs.menu1.save(dateIn)">OK</v-btn>
-            </v-date-picker>
-          </v-menu>
+
+          <v-menu :close-on-content-click="false" :nudge-right="40" transition="scale-transition"
+            offset-y min-width="290px"
+          > <!-- Check in date -->
+        <template v-slot:activator="{ on, attrs }"> 
+          <v-text-field v-model="dateIn" label="Check in" prepend-inner-icon="fa-calendar-check"
+            readonly v-bind="attrs" v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker v-model="dateIn" @input="menu2 = false"></v-date-picker>
+      </v-menu>
         </v-flex>
+
         <v-flex xs12 lg2>
-          <v-menu
-            ref="menu2"
-            :close-on-content-click="false"
-            :return-value.sync="dateOut"
-            transition="scale-transition"
-            offset-y
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                prepend-inner-icon="fa-calendar-minus"
-                v-model="dateOut"
-                label="Check out"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="dateOut" no-title scrollable color="primary">
-              <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu2 = false">Cancel</v-btn>
-              <v-btn text color="primary" @click="$refs.menu2.save(dateOut)">OK</v-btn>
-            </v-date-picker>
-          </v-menu>
+          <v-menu :close-on-content-click="false" :nudge-right="40" transition="scale-transition"
+            offset-y min-width="290px"
+          ><!-- Check out date -->
+        <template v-slot:activator="{ on, attrs }">
+          <v-text-field v-model="dateOut" label="Check out" prepend-inner-icon="fa-calendar-minus"
+            readonly v-bind="attrs" v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker v-model="dateOut"></v-date-picker>
+      </v-menu>
         </v-flex>
-        <v-flex xs12 lg1>
+
+
+        <v-flex xs12 lg1> <!-- Number of children -->
           <v-text-field label="Children" v-model="children" prepend-inner-icon="fa-child" type="number"></v-text-field>
         </v-flex>
-        <v-flex xs12 lg1>
+
+        <v-flex xs12 lg1> <!-- Number of adults -->
           <v-text-field label="Adults" prepend-inner-icon="fa-male" v-model="adults" type="number"></v-text-field>
         </v-flex>
+
         <v-flex xs12 lg2 class="my-auto">
-          <v-btn router  type="submit" block x-large class="primary">Search</v-btn>
+          <v-btn router  type="submit" block x-large class="primary">Search<v-icon right>fa-search</v-icon></v-btn>
         </v-flex>
       </v-layout>
     </v-form>

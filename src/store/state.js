@@ -53,6 +53,11 @@ export const store = new Vuex.Store({
             state.user.push(payload)
         },
 
+        signUser (state, payload) {
+            state.signedIn.length = 0
+            state.signedIn.push(payload)
+        },
+
         setLoading (state, payload) {
             state.loading = payload
         }
@@ -72,23 +77,22 @@ export const store = new Vuex.Store({
         },
 
         signIn ({commit}, payload) {
-            commit('setLoading', true)
+            commit('setLoading', true) // Start loading 
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
-                .then(response => {
-                    const signUser  = {
-                        uid: response.user.uid
-                    }
-                    firebase.database().ref('/users/' + response.user.uid).once('value')
-                        .then(snapshot => {
-                            console.log(snapshot.key)
-                        })
-                    // commit('addUser', signUser)
+                .then(response => { // authorise user and get auth uid
+                    var uid = response.user.uid
+                    commit('signUser', uid)
                     commit('setLoading', false)
                 }).catch(error =>{
                     console.log(error)
-                    commit('setLoading', true)
+                    commit('setLoading', false)
                 })
                 
+        },
+
+        logout ({commit}) {
+            firebase.auth().signOut()
+            commit('signUser', null)
         },
 
         addUser ({commit}, payload) {
@@ -100,16 +104,8 @@ export const store = new Vuex.Store({
                         email: payload.email,
                         uid: response.user.uid
                     }
-                    firebase.database().ref('users').push(newUser)
-                        .then(response => {
-                            console.log(response)
-                            commit('addUser', newUser)
-                            commit('setLoading', false)
-                        }).catch(error => {
-                            console.log(error)
-                            commit('setLoading', false)
-                        })
-                    
+                    commit('addUser', newUser)
+                    commit('setLoading', false)
                 }).catch(error => {
                     console.log(error)
                     commit('setLoading', false)
@@ -123,6 +119,10 @@ export const store = new Vuex.Store({
 
         getUser (state) {
             return state.user
+        },
+
+        signed (state) {
+            return state.signedIn
         },
 
         getStatus (state) {
