@@ -22,6 +22,11 @@
             Sign up
         </v-btn>
 
+        <v-btn text router to="/login">
+            <v-icon left>fa-user-check</v-icon>
+            Login
+        </v-btn>
+
         </v-toolbar-items>
     
     </v-app-bar>

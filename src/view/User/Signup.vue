@@ -51,9 +51,27 @@ export default {
         }
     },
 
+    computed: {
+        user() {
+            return this.$store.getters.getUser
+        }
+    },
+
+    watch: {
+        user (value) {
+        if (value !== null && value !== undefined) 
+            this.$router.push('/')
+        }
+    },
+
     methods: {
         handleSignUp () {
-            console.log({'Email': this.userEmail, 'Name': this.userName, 'Password': this.userPassword})
+            const userData = {
+                name: this.userName,
+                email:this.userEmail,
+                password: this.userPassword
+            }
+            this.$store.dispatch('addUser', userData)
         }
     }
 }

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as firebase from 'firebase'
 
 Vue.use(Vuex)
 
@@ -33,13 +34,21 @@ export const store = new Vuex.Store({
             ]}
         ], // Hotels array ENDS
 
-        status: []
+        status: [],
+
+        user: [],
+
+        signedIn: []
 
     },
     mutations: {
         updateStatus (state, payload) {
             state.status.length = 0 // empties the array
             state.status.push(payload)
+        },
+
+        addUser (state, payload) {
+            state.user.push(payload)
         }
     },
     actions: {
@@ -51,13 +60,45 @@ export const store = new Vuex.Store({
                 dateIn: payload.dateIn,
                 dateOut: payload.dateOut
             }
-
             commit('updateStatus', info)
+        },
+
+        signIn ({commit}, payload) {
+            console.log(payload.email)
+            firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+                .then(response => {
+                    const signUser  = {
+                        email: payload.email,
+                        uid: response.user.uid
+                    }
+                    commit('addUser', signUser)
+                }).catch(error =>{
+                    console.log(error)
+                })
+                
+        },
+
+        addUser ({commit}, payload) {
+            firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+                .then(response => {
+                    const newUser = {
+                        name: payload.name,
+                        email: payload.email,
+                        uid: response.user.uid
+                    }
+                    commit('addUser', newUser)
+                }).catch(error => {
+                    console.log(error)
+                })
         }
     },
     getters: {
         hotelArr (state) {
             return state.hotels
+        },
+
+        getUser (state) {
+            return state.user
         },
 
         getStatus (state) {

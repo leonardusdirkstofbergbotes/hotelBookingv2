@@ -71,7 +71,7 @@
           <v-text-field label="Adults" prepend-inner-icon="fa-male" v-model="adults" type="number"></v-text-field>
         </v-flex>
         <v-flex xs12 lg2 class="my-auto">
-          <v-btn router  type="submit" block x-large class="primary">Book</v-btn>
+          <v-btn router  type="submit" block x-large class="primary">Search</v-btn>
         </v-flex>
       </v-layout>
     </v-form>

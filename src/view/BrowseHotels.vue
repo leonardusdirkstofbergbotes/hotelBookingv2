@@ -14,7 +14,7 @@
         <h1 class="display-1">Showing results for <b class="display-2">{{status[0].location}}</b></h1>
       </v-flex>
 
-        <v-layout xs12 row wrap class="grey lighten-4 rounded-lg pa-3 my-4" v-for="hotel in getHotels" :key="hotel.id"> <!-- Individual hotel wrapper -->
+        <v-layout xs12 row wrap class="grey lighten-4 rounded-lg pa-3 my-8" v-for="hotel in getHotels" :key="hotel.id"> <!-- Individual hotel wrapper -->
           <v-flex xs12 md6 lg3> <!-- Image of the hotel -->
              <v-img class="white--text align-end"
               :src="hotel.imageSrc"
@@ -61,7 +61,7 @@
                         </v-flex>
                           
                         <v-layout xs12 md12 lg4 justify-end> 
-                          <v-btn color="primary" :to="'/hotel/' + hotel.id">View</v-btn>
+                          <v-btn color="primary" :to="'/hotel/' + hotel.id"><v-icon left>fa-search</v-icon>View more</v-btn>
                         </v-layout>
                     </v-layout>
                 
