@@ -59,8 +59,10 @@ export default {
 
     watch: {
         user (value) {
-        if (value !== null && value !== undefined) 
-            this.$router.push('/')
+            if (value !== null && value !== undefined) {
+                this.$router.push('/')
+                alert('Thank you ' + this.user[0].name + ' for signing up.  Please login to continue')
+            }
         }
     },
 

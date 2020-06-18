@@ -48,6 +48,7 @@ export const store = new Vuex.Store({
         },
 
         addUser (state, payload) {
+            state.user.length = 0
             state.user.push(payload)
         }
     },
@@ -64,14 +65,16 @@ export const store = new Vuex.Store({
         },
 
         signIn ({commit}, payload) {
-            console.log(payload.email)
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
                 .then(response => {
                     const signUser  = {
-                        email: payload.email,
                         uid: response.user.uid
                     }
-                    commit('addUser', signUser)
+                    firebase.database().ref('/users/' + response.user.uid).once('value')
+                        .then(snapshot => {
+                            console.log(snapshot.key)
+                        })
+                    // commit('addUser', signUser)
                 }).catch(error =>{
                     console.log(error)
                 })
@@ -86,7 +89,14 @@ export const store = new Vuex.Store({
                         email: payload.email,
                         uid: response.user.uid
                     }
-                    commit('addUser', newUser)
+                    firebase.database().ref('users').push(newUser)
+                        .then(response => {
+                            console.log(response)
+                            commit('addUser', newUser)
+                        }).catch(error => {
+                            console.log(error)
+                        })
+                    
                 }).catch(error => {
                     console.log(error)
                 })
