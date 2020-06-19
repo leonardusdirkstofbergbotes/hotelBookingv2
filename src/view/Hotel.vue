@@ -4,12 +4,15 @@
             <v-flex xs12>
                 <v-carousel>
                     <v-carousel-item
-                        v-for="item in hotel.carouselItems"
+                        v-for="item in carousel"
                         :key="item.url"
                         :src="item.url"
                     >
                     </v-carousel-item>
                 </v-carousel>
+                <v-flex v-for="item in carousel" :key="item" class="ma-10">
+                        {{item}}
+                </v-flex>
             </v-flex>
             <v-flex>
                 {{hotel.location}}
@@ -28,6 +31,10 @@
 export default {
     props: ['id'],
     computed: {
+        carousel () {
+            return this.$store.getters.carousel
+        },
+
         hotel () {
             return this.$store.getters.singleHotel(this.id)
         }

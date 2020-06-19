@@ -61,7 +61,7 @@
                         </v-flex>
                           
                         <v-layout xs12 md12 lg4 justify-end> 
-                          <v-btn color="primary" :to="'/hotel/' + hotel.id">View more</v-btn>
+                          <v-btn color="primary" @click="carousel(hotel.id)">View more</v-btn>
                         </v-layout>
                     </v-layout>
                 
@@ -83,7 +83,14 @@
       },
 
       getHotels () {
-        return this.$store.getters.hotelLoc(this.location)
+        return this.$store.getters.hotelArr
+      }
+    },
+
+    methods: {
+      carousel (id) {
+        this.$store.dispatch('getCarousel', id)
+        this.$router.push('/hotel/' + id)
       }
     }
   }

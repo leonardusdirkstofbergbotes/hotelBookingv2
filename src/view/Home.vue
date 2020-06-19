@@ -201,7 +201,7 @@
           dateIn: this.dateIn,
           dateOut: this.dateOut
         }
-
+        this.$store.dispatch('getHotels', this.location)
         this.$store.dispatch('updateStatus', searchData)
         window.scrollTo(0, 0)
         this.$router.push('/browse/' + this.location)
