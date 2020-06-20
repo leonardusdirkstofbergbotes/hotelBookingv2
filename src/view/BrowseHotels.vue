@@ -66,7 +66,7 @@
                       </v-layout> <!-- amenities ends -->
 
                         <v-flex>
-                          R {{hotel.price}}
+                          R {{hotel.price}} <i>p/d</i>
                         </v-flex>
                           
                         <v-layout xs12 md12 lg4 justify-end> 
