@@ -42,10 +42,6 @@ export const store = new Vuex.Store({
         storeHotels (state, payload) {
             state.hotels.push(payload)
         },
-
-        storeItems(state, payload) {
-            state.carouselItems.push(payload)
-        }
     },
     actions: {
         updateStatus ({commit}, payload) {
@@ -114,21 +110,14 @@ export const store = new Vuex.Store({
                         location: doc.data().location,
                         name: doc.data().name,
                         price: doc.data().price,
-                        rating: doc.data().rating
+                        rating: doc.data().rating,
+                        carouselItems: doc.data().carouselItems,
+                        amenities: doc.data().amenities
                     }
                     commit('storeHotels', pack)
                 })
             }) //firestore query ends
         },
-
-        getCarousel ({commit}, payload) {
-            console.log(payload)
-            firebase.firestore().collection('hotels').doc(payload).collection('carousel').doc('items').get().then(snapshot => {
-            console.log(snapshot.data().item1)
-            const pack = [snapshot.data().item1, snapshot.data().item2]
-                commit('storeItems', pack)
-            })
-        }
     },
     getters: {
         hotelArr (state) {
@@ -137,10 +126,6 @@ export const store = new Vuex.Store({
 
         countHotels (state) {
             return state.hotels.length
-        },
-
-        carousel (state) {
-            return state.carouselItems
         },
 
         getUser (state) {

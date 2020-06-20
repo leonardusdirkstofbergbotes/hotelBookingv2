@@ -5,7 +5,7 @@
         <v-flex xs12 class="my-1">
           <h1 class="display-1">Your search status</h1>
         </v-flex>
-      <v-flex-item :name="key" v-for="(value, key) in status[0]" :key="key.location" class="text-center mb-4"> 
+      <v-flex-item name="searchStatus" v-for="(value, key) in status[0]" :key="key.location" class="text-center mb-4"> 
         <b>{{key}}:</b> {{value}}
       </v-flex-item>
       </v-layout>
@@ -15,6 +15,8 @@
       </v-flex>
 
         <v-layout xs12 row wrap class="grey lighten-4 rounded-lg pa-3 my-8" v-for="hotel in getHotels" :key="hotel.id"> <!-- Individual hotel wrapper -->
+          <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
+          </v-progress-circular> <!-- Loading circle -->
           <v-flex xs12 md6 lg3> <!-- Image of the hotel -->
              <v-img class="white--text align-end"
               :src="hotel.imageSrc"
@@ -51,10 +53,17 @@
                 </v-flex>
 
                 
-                    <v-layout row xs12 justify-space-between class="pa-4" align-end>
-                        <v-flex>
-                            Amenities come here
+                    <v-layout row xs12 class="pa-4" align-end>
+                      <v-layout>
+                        <v-flex v-for="(value, key) in hotel.amenities" :key="value" shrink class="mx-2">
+                            <v-tooltip bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-icon v-bind="attrs" v-on="on">{{key}}</v-icon>
+                            </template>
+                            <span>{{value}}</span>
+                            </v-tooltip>
                         </v-flex>
+                      </v-layout> <!-- amenities ends -->
 
                         <v-flex>
                           R {{hotel.price}}
@@ -78,6 +87,10 @@
     props: ['location'],
     computed: {
 
+      loading () {
+        return this.$store.getters.loading
+      },
+
       status () {
         return this.$store.getters.getStatus
       },
@@ -89,7 +102,6 @@
 
     methods: {
       carousel (id) {
-        this.$store.dispatch('getCarousel', id)
         this.$router.push('/hotel/' + id)
       }
     }
