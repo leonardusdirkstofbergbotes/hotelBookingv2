@@ -55,7 +55,7 @@
         </v-flex>
 
         <v-flex xs12 lg2 class="my-auto">
-          <v-btn router  type="submit" block x-large class="primary">Search<v-icon right>fa-search</v-icon></v-btn>
+          <v-btn type="submit" block x-large class="primary">Search<v-icon right>fa-search</v-icon></v-btn>
         </v-flex>
       </v-layout>
     </v-form>
@@ -189,11 +189,15 @@
     computed: {
       loading () {
         return this.$store.getters.loading
+      },
+
+      countHotels () {
+        return this.$store.getters.countHotels
       }
     },
+    
     methods: {
       handleSearch () {
-        console.log('clicked')
         const searchData = {
           location: this.location,
           children: this.children,
@@ -201,7 +205,10 @@
           dateIn: this.dateIn,
           dateOut: this.dateOut
         }
-        this.$store.dispatch('getHotels', this.location)
+        if (this.countHotels === 0) {
+          this.$store.dispatch('getHotels')
+        }
+        
         this.$store.dispatch('updateStatus', searchData)
         window.scrollTo(0, 0)
         this.$router.push('/browse/' + this.location)
