@@ -83,7 +83,7 @@
       },
 
       getHotels () {
-        return this.$store.getters.hotelArr
+        return this.$store.getters.hotelLoc(this.location)
       }
     },
 

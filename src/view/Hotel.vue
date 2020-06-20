@@ -2,18 +2,12 @@
     <v-container>
         <v-layout column> <!-- single hotel wrapper (stacks) -->
             <v-flex xs12>
-                <v-carousel>
-                    <v-carousel-item
-                        v-for="item in carousel"
-                        :key="item.url"
-                        :src="item.url"
-                    >
+                <v-carousel v-for="item in carousel" :key="item">
+                    <v-carousel-item v-for="value in item" :key="value" :src="value">
                     </v-carousel-item>
                 </v-carousel>
-                <v-flex v-for="item in carousel" :key="item" class="ma-10">
-                        {{item}}
-                </v-flex>
             </v-flex>
+            
             <v-flex>
                 {{hotel.location}}
             </v-flex>

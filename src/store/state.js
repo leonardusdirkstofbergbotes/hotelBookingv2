@@ -129,6 +129,7 @@ export const store = new Vuex.Store({
         },
 
         getHotels ({commit}, payload) {
+            
             firebase.firestore().collection('hotels').where('location', '==', payload).get().then(snapshot => {
                 snapshot.docs.forEach(doc => {
                     const pack = {
@@ -142,15 +143,15 @@ export const store = new Vuex.Store({
                     }
                     commit('storeHotels', pack)
                 })
-            })
+            }) //firestore query ends
         },
 
         getCarousel ({commit}, payload) {
             console.log(payload)
-            firebase.firestore().collection('hotels').doc(payload).collection('carousel').get().then(snapshot => {
-                snapshot.docs.forEach(doc => {
-                    commit('storeItems', doc.data())
-                })
+            firebase.firestore().collection('hotels').doc(payload).collection('carousel').doc('items').get().then(snapshot => {
+            console.log(snapshot.data().item1)
+            const pack = [snapshot.data().item1, snapshot.data().item2]
+                commit('storeItems', pack)
             })
         }
     },
