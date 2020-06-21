@@ -10,8 +10,6 @@ export const store = new Vuex.Store({
 
         hotels: [],
 
-        carouselItems: [],
-
         status: [],
 
         user: [],

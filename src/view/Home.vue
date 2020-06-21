@@ -20,7 +20,7 @@
         </v-flex>
         <v-flex xs12 lg2>
 
-          <v-menu close-on-content-click="true" :nudge-right="40" transition="scale-transition"
+          <v-menu :close-on-content-click="true" :nudge-right="40" transition="scale-transition"
             offset-y min-width="290px"
           > <!-- Check in date -->
         <template v-slot:activator="{ on, attrs }"> 
@@ -33,7 +33,7 @@
         </v-flex>
 
         <v-flex xs12 lg2>
-          <v-menu close-on-content-click="true" :nudge-right="40" transition="scale-transition"
+          <v-menu :close-on-content-click="true" :nudge-right="40" transition="scale-transition"
             offset-y min-width="290px"
           ><!-- Check out date -->
         <template v-slot:activator="{ on, attrs }">
@@ -163,7 +163,7 @@
         </v-layout>
 
       <v-layout row wrap class="text-center mx-10 mb-15 rounded-lg"  elevation-4> 
-          <v-flex v-for="area in locations" :key="area" xs6 sm4 md3 lg3 class="py-4">
+          <v-flex v-for="area in locations" @click="goTo(area)" style="cursor: pointer;" :key="area" xs6 sm4 md3 lg3 class="py-4">
             {{area}}
           </v-flex>
       </v-layout>
@@ -222,6 +222,17 @@
       viewHotel (id) {
         this.$router.push('/hotel/' + id)
       },
+
+      goTo (area) {
+        this.location = area
+        if (this.countHotels === 0) {
+          this.$store.dispatch('updateStatus', {location: this.location})
+            this.$store.dispatch('getHotels')
+            this.$router.push('/browse/' + this.location)
+          } else {
+            this.$router.push('/browse/' + this.location)
+          }
+      }
 
     }
   }
