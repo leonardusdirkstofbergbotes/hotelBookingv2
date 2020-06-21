@@ -12,6 +12,8 @@ export const store = new Vuex.Store({
 
         status: [],
 
+        days: 1,
+
         user: [],
 
         signedIn: []
@@ -40,6 +42,10 @@ export const store = new Vuex.Store({
         storeHotels (state, payload) {
             state.hotels.push(payload)
         },
+
+        setDays (state, payload) {
+            state.days = payload
+        }
     },
     actions: {
         updateStatus ({commit}, payload) {
@@ -117,6 +123,14 @@ export const store = new Vuex.Store({
                 commit('setLoading', false)
             }) //firestore query ends
         },
+
+        calcDays ({commit}, payload) {
+            const date1 = new Date(payload.date1);
+            const date2 = new Date(payload.date2);
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            commit('setDays', diffDays)
+        }
     },
     getters: {
         hotelArr (state) {
@@ -160,4 +174,11 @@ export const store = new Vuex.Store({
             }
         }
     }
-}) 
+})
+
+// const date1 = new Date('7/13/2010');
+// const date2 = new Date('12/15/2010');
+// const diffTime = Math.abs(date2 - date1);
+// const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+// console.log(diffTime + " milliseconds");
+// console.log(diffDays + " days");

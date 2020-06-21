@@ -202,6 +202,11 @@
     methods: {
       handleSearch () {
         if (this.$refs.form.validate()) {
+         const dates = {
+            date1: this.dateIn,
+            date2: this.dateOut
+          }
+          this.$store.dispatch('calcDays', dates)
           const searchData = {
             location: this.location,
             children: this.children,
