@@ -14,7 +14,9 @@
         <h1 class="display-1">Showing results for <b class="display-2">{{status[0].location}}</b></h1>
       </v-flex>
 
+      <transition-group appear name="slideIn">
         <v-layout xs12 row wrap class="grey lighten-4 rounded-lg pa-3 my-8" v-for="hotel in getHotels" :key="hotel.id"> <!-- Individual hotel wrapper -->
+         
           <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
           </v-progress-circular> <!-- Loading circle -->
           <v-flex xs12 md6 lg3> <!-- Image of the hotel -->
@@ -78,12 +80,15 @@
           </v-flex>
 
         </v-layout>
+      </transition-group>
+      
       
     </v-container>
 </template>
 
 <script>
   export default {
+
     props: ['location'],
     computed: {
 
@@ -107,3 +112,27 @@
     }
   }
 </script>
+
+<style>
+
+.slideIn-enter {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.slideIn-enter-active {
+  transition: all .4s ease;
+  transition-delay: 0.7s;
+}
+
+.slideIn-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.slideIn-leave-active {
+  transition: all .1 ease;
+  
+}
+
+</style>

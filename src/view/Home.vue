@@ -16,11 +16,11 @@
       <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-10> <!-- Search bar -->
         
         <v-flex xs12 lg3> <!-- Search location -->
-          <v-autocomplete v-model="location" :items="locations" label="Location" prepend-inner-icon="mdi-map-marker"></v-autocomplete>
+          <v-autocomplete hide-no-data v-model="location" :items="locations" label="Location" prepend-inner-icon="mdi-map-marker"></v-autocomplete>
         </v-flex>
         <v-flex xs12 lg2>
 
-          <v-menu :close-on-content-click="false" :nudge-right="40" transition="scale-transition"
+          <v-menu close-on-content-click="true" :nudge-right="40" transition="scale-transition"
             offset-y min-width="290px"
           > <!-- Check in date -->
         <template v-slot:activator="{ on, attrs }"> 
@@ -33,7 +33,7 @@
         </v-flex>
 
         <v-flex xs12 lg2>
-          <v-menu :close-on-content-click="false" :nudge-right="40" transition="scale-transition"
+          <v-menu close-on-content-click="true" :nudge-right="40" transition="scale-transition"
             offset-y min-width="290px"
           ><!-- Check out date -->
         <template v-slot:activator="{ on, attrs }">

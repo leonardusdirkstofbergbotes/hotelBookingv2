@@ -100,7 +100,7 @@ export const store = new Vuex.Store({
         },
 
         getHotels ({commit}) {
-            
+            commit('setLoading', true)
             firebase.firestore().collection('hotels').get().then(snapshot => {
                 snapshot.docs.forEach(doc => {
                     const pack = {
@@ -116,6 +116,7 @@ export const store = new Vuex.Store({
                     }
                     commit('storeHotels', pack)
                 })
+                commit('setLoading', false)
             }) //firestore query ends
         },
     },
