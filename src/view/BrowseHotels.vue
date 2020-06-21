@@ -22,18 +22,14 @@
          
           <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
           </v-progress-circular> <!-- Loading circle -->
+          
           <v-flex xs12 md6 lg3> <!-- Image of the hotel -->
-             <v-img class="white--text align-end"
-              :src="hotel.imageSrc"
-            >
+             <v-img lazy-src="@/assets/load.gif" class="white--text align-end" :src="hotel.imageSrc" min-height="300px">
              </v-img>
           </v-flex>
 
-          
-
           <v-flex xs12 md6 lg9>
             <v-layout column>
-
 
                   <v-layout row xs12 justify-space-between class="px-4"><!-- Title and rating on top -->
                       <v-flex xs12 md6 lg6>
