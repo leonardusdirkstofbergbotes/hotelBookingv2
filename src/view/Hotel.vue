@@ -7,7 +7,7 @@
             </v-flex>
 
             <v-flex xs12>
-                <v-carousel cycle interval="3000">
+                <v-carousel>
                     <v-carousel-item v-for="(value, key) in hotel.carouselItems" :key="key" :src="value">
                     </v-carousel-item>
                 </v-carousel>

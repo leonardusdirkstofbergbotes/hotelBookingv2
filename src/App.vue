@@ -4,7 +4,9 @@
       <NAvbar />
     </nav>
     <main> <!-- dynamic views -->
-      <router-view></router-view>
+    <transition name="view">
+      <router-view />
+    </transition>
     </main>
     <footer>
       <FOoter />
@@ -29,3 +31,21 @@ export default {
   }),
 };
 </script>
+
+<style>
+.view-enter-active, .view-leave-active {
+  transition: opacity 0.5s ease-in-out
+}
+
+.view-enter, .view-leave-to {
+  opacity: 0;
+}
+
+.view-enter-active {
+  transition-delay: 0.5s;
+}
+
+.view-enter-to, .view-leave {
+  opacity: 1;
+}
+</style>
