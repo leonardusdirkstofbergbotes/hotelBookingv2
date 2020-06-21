@@ -162,10 +162,10 @@
           </v-flex>
         </v-layout>
 
-      <v-layout row wrap class="text-center mx-10 mb-15 rounded-lg"  elevation-4> 
-          <v-flex v-for="area in locations" @click="goTo(area)" style="cursor: pointer;" :key="area" xs6 sm4 md3 lg3 class="py-4">
+      <v-layout row wrap class="mx-10 mb-15 rounded-lg"  elevation-4> 
+          <v-btn text ripple v-for="area in locations" @click="goTo(area)" style="cursor: pointer;" :key="area" xs6 sm4 md3 lg3 class="pa-10" width="25%">
             {{area}}
-          </v-flex>
+          </v-btn>
       </v-layout>
     </v-container>
   </div>
@@ -230,6 +230,7 @@
             this.$store.dispatch('getHotels')
             this.$router.push('/browse/' + this.location)
           } else {
+            this.$store.dispatch('updateStatus', {location: this.location})
             this.$router.push('/browse/' + this.location)
           }
       }
