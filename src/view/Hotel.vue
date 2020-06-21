@@ -20,6 +20,18 @@
             <v-flex>
                 {{hotel.info}}
             </v-flex>
+
+            <v-layout column v-for="item in bookings" :key='item'>
+                <v-flex>
+                     Adults: R {{item.adults * (days * hotel.price)}}
+                </v-flex>
+                <v-flex v-if="item.children !== 0">
+                    Children: R {{item.children * (hotel.price/2 * days)}} (50% off)
+                </v-flex>
+                <v-flex>
+                    <b>Total: R {{ (item.adults * (days * hotel.price)) + (item.children * (hotel.price/2 * days)) }}</b>
+                </v-flex>
+            </v-layout>
         </v-layout>
     </v-container>
 </template>
@@ -28,6 +40,14 @@
 export default {
     props: ['id'],
     computed: {
+
+        bookings () {
+            return this.$store.getters.getStatus
+        },
+
+        days () {
+            return this.$store.getters.getDays
+        },
 
         hotel () {
             return this.$store.getters.singleHotel(this.id)

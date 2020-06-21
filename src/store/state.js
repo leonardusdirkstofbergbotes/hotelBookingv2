@@ -172,6 +172,10 @@ export const store = new Vuex.Store({
                     return hotel.id === hotelID
                 })
             }
+        },
+
+        getDays (state) {
+            return state.days
         }
     }
 })
