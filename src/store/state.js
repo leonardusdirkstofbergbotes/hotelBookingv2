@@ -122,7 +122,8 @@ export const store = new Vuex.Store({
             const diffTime = Math.abs(date2 - date1);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             commit('setDays', diffDays)
-        }
+        },
+
     },
     getters: {
         hotelArr (state) {

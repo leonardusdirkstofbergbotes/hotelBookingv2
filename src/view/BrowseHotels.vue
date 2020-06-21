@@ -1,13 +1,16 @@
 <template>
     <v-container>
 
-      <v-layout row wrap justify-space-between elevation-1 class="pa-2 mb-11 rounded-lg">
+      <v-layout row wrap justify-space-between elevation-1 class="pa-2 mb-11 rounded-lg" style="position: relative;">
         <v-flex xs12 class="my-1">
           <h1 class="display-1">Your search status</h1>
         </v-flex>
       <v-flex-item name="searchStatus" v-for="(value, key) in status[0]" :key="key.location" class="text-center mb-4"> 
         <b>{{key}}:</b> {{value}}
       </v-flex-item>
+      <v-btn fab absolute bottom right color="secondary">
+        <v-icon>mdi-pencil</v-icon>
+      </v-btn>
       </v-layout>
 
       <v-flex xs12 class="my-6">
@@ -26,9 +29,12 @@
              </v-img>
           </v-flex>
 
+          
+
           <v-flex xs12 md6 lg9>
             <v-layout column>
-                 
+
+
                   <v-layout row xs12 justify-space-between class="px-4"><!-- Title and rating on top -->
                       <v-flex xs12 md6 lg6>
                         <h2 class="display-3">{{hotel.name}}</h2>
