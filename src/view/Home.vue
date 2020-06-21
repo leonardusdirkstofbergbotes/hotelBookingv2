@@ -12,11 +12,11 @@
         </v-flex>
       </v-layout>
 
-    <v-form @submit.prevent="handleSearch">
+    <v-form @submit.prevent="handleSearch" ref="form">
       <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-10> <!-- Search bar -->
         
         <v-flex xs12 lg3> <!-- Search location -->
-          <v-autocomplete hide-no-data v-model="location" :items="locations" label="Location" prepend-inner-icon="mdi-map-marker"></v-autocomplete>
+          <v-autocomplete :rules="inputRules" hide-no-data v-model="location" :items="locations" label="Location" prepend-inner-icon="mdi-map-marker"></v-autocomplete>
         </v-flex>
         <v-flex xs12 lg2>
 
@@ -24,7 +24,7 @@
             offset-y min-width="290px"
           > <!-- Check in date -->
         <template v-slot:activator="{ on, attrs }"> 
-          <v-text-field v-model="dateIn" label="Check in" prepend-inner-icon="fa-calendar-check"
+          <v-text-field :rules="inputRules" v-model="dateIn" label="Check in" prepend-inner-icon="fa-calendar-check"
             readonly v-bind="attrs" v-on="on"
           ></v-text-field>
         </template>
@@ -37,7 +37,7 @@
             offset-y min-width="290px"
           ><!-- Check out date -->
         <template v-slot:activator="{ on, attrs }">
-          <v-text-field v-model="dateOut" label="Check out" prepend-inner-icon="fa-calendar-minus"
+          <v-text-field :rules="inputRules" v-model="dateOut" label="Check out" prepend-inner-icon="fa-calendar-minus"
             readonly v-bind="attrs" v-on="on"
           ></v-text-field>
         </template>
@@ -175,6 +175,9 @@
   export default {
     data() {
       return {
+        inputRules: [
+          v => v.length >= 3 || 'Make sure to fill in this part'
+        ],
       location: '',
       children: 0,
       adults: 1,
@@ -198,20 +201,22 @@
     
     methods: {
       handleSearch () {
-        const searchData = {
-          location: this.location,
-          children: this.children,
-          adults: this.adults,
-          dateIn: this.dateIn,
-          dateOut: this.dateOut
+        if (this.$refs.form.validate()) {
+          const searchData = {
+            location: this.location,
+            children: this.children,
+            adults: this.adults,
+            dateIn: this.dateIn,
+            dateOut: this.dateOut
+          }
+          if (this.countHotels === 0) {
+            this.$store.dispatch('getHotels')
+          }
+          
+          this.$store.dispatch('updateStatus', searchData)
+          window.scrollTo(0, 0)
+          this.$router.push('/browse/' + this.location)
         }
-        if (this.countHotels === 0) {
-          this.$store.dispatch('getHotels')
-        }
-        
-        this.$store.dispatch('updateStatus', searchData)
-        window.scrollTo(0, 0)
-        this.$router.push('/browse/' + this.location)
       },
 
       viewHotel (id) {
