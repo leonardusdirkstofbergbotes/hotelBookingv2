@@ -53,7 +53,7 @@ export default {
     watch: {
         signedIn (value) {
             console.log(value)
-            if (value != null) {
+            if (value !== null) {
                 this.loggedIn = true
             } else if (value === null) {
                 this.loggedIn = false

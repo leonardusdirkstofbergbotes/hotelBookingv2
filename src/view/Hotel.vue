@@ -21,7 +21,7 @@
                 {{hotel.info}}
             </v-flex>
 
-            <v-layout column v-for="item in bookings" :key='item'>
+            <v-layout column v-for="item in bookings" :key='item.adults'>
                 <v-flex>
                      Adults: R {{item.adults * (days * hotel.price)}}
                 </v-flex>

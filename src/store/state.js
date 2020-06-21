@@ -16,7 +16,7 @@ export const store = new Vuex.Store({
 
         user: [],
 
-        signedIn: []
+        signedIn: ''
 
     },
     mutations: {
@@ -31,8 +31,7 @@ export const store = new Vuex.Store({
         },
 
         signUser (state, payload) {
-            state.signedIn.length = 0
-            state.signedIn.push(payload)
+            state.signedIn = payload
         },
 
         setLoading (state, payload) {
@@ -62,12 +61,6 @@ export const store = new Vuex.Store({
         },
 
         signIn ({commit}, payload) {
-            firebase.firestore().collection('hotels').get().then(snapshot => {
-                snapshot.docs.forEach(doc => {
-                    console.log(doc.data())
-                })
-            })
-
             commit('setLoading', true) // Start loading 
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
                 .then(response => { // authorise user and get auth uid
@@ -77,8 +70,7 @@ export const store = new Vuex.Store({
                 }).catch(error =>{
                     console.log(error)
                     commit('setLoading', false)
-                })
-                
+                })   
         },
 
         logout ({commit}) {
