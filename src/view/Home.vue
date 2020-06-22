@@ -9,7 +9,7 @@
       </v-layout>
 
     <v-form @submit.prevent="handleSearch" ref="form">
-      <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6" elevation-10> <!-- Search bar -->
+      <v-layout justify-space-between row wrap class="white lighten-4 pa-4 rounded-lg mb-6 mx-1" elevation-10> <!-- Search bar -->
         
         <v-flex xs12 lg3> <!-- Search location -->
           <v-autocomplete :rules="inputRules" hide-no-data v-model="location" :items="locations" label="Location" prepend-inner-icon="mdi-map-marker"></v-autocomplete>
@@ -67,7 +67,7 @@
       </v-layout>
       
       <v-layout row wrap>
-        <v-flex xs12 lg4 class="mb-4">
+        <v-flex xs12 sm6 lg4 class="mb-4">
           <v-card class="mx-auto" max-width="290">
             <v-img class="white--text align-end" height="200px"
               src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
@@ -92,7 +92,7 @@
           </v-card>
         </v-flex>
 
-        <v-flex xs12 lg4 class="mb-4">
+        <v-flex xs12 sm6 lg4 class="mb-4">
           <v-card class="mx-auto" max-width="290">
             <v-img class="white--text align-end" height="200px"
               src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
@@ -158,8 +158,8 @@
           </v-flex>
         </v-layout>
 
-      <v-layout row wrap class="mx-10 mb-15 rounded-lg"  elevation-4> 
-          <v-btn text ripple v-for="area in locations" @click="goTo(area)" style="cursor: pointer;" :key="area" xs6 sm4 md3 lg3 class="pa-10" width="25%">
+      <v-layout row wrap class="mx-5 mb-15 rounded-lg customWrap"  elevation-4> 
+          <v-btn text ripple v-for="area in locations" @click="goTo(area)" style="cursor: pointer;" width="200px" :key="area" class="pa-10">
             {{area}}
           </v-btn>
       </v-layout>
@@ -215,13 +215,14 @@
           }
           
           this.$store.dispatch('updateStatus', searchData)
-          window.scrollTo(0, 0)
+          setTimeout(function(){ window.scrollTo(0, 0); }, 500);
           this.$router.push('/browse/' + this.location)
         }
       },
 
       viewHotel (id) {
         this.$router.push('/hotel/' + id)
+        setTimeout(function(){ window.scrollTo(0, 0); }, 500);
       },
 
       goTo (area) {
@@ -234,6 +235,8 @@
             this.$store.dispatch('updateStatus', {location: this.location})
             this.$router.push('/browse/' + this.location)
           }
+          setTimeout(function(){ window.scrollTo(0, 0); }, 500);
+          
       }
 
     }
@@ -245,5 +248,9 @@
 #searchBar {
   margin-top: 80px;
   border-radius: 10px;
+}
+
+.customWrap {
+  justify-content: space-evenly;
 }
 </style>

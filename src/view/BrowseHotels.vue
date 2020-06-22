@@ -1,16 +1,13 @@
 <template>
     <v-container>
 
-      <v-layout row wrap justify-space-between elevation-1 class="pa-2 mb-11 rounded-lg" style="position: relative;">
+      <v-layout row wrap justify-space-between elevation-1 class="pa-2 mb-16 rounded-lg light-blue lighten-5" style="position: relative;">
         <v-flex xs12 class="my-1">
           <h1 class="display-1">Your search status</h1>
         </v-flex>
       <v-flex-item name="searchStatus" v-for="(value, key) in status[0]" :key="key.location" class="text-center mb-4"> 
         <b>{{key}}:</b> {{value}}
       </v-flex-item>
-      <v-btn fab absolute bottom right color="secondary">
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
       </v-layout>
 
       <v-flex xs12 class="my-6">

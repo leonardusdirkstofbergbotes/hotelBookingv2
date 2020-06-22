@@ -1,5 +1,5 @@
 <template>
-    <v-footer dark padless>
+    <v-footer dark padless id="foot">
     <v-card flat tile class="grey lighten-2 white--text text-center">
       <v-card-text>
         Some random text

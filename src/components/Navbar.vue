@@ -4,15 +4,17 @@
       dense
       dark
     >
-
+        <v-btn icon to="/">
+            <v-icon>fa-home</v-icon>
+        </v-btn>
         <v-toolbar-title>
-        <router-link to="/" style="cursor: pointer" tag="span">Brand comes here</router-link>
+          <router-link to="/" style="cursor: pointer" tag="span">Brand comes here</router-link>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
-        <v-toolbar-items class="hidden-xs-only">
-        <v-btn text>
+        <v-toolbar-items>
+        <v-btn text link href="#foot">
             <v-icon left>fa-address-book</v-icon>
             Contact us
         </v-btn>
