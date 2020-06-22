@@ -41,11 +41,11 @@
                           length="5"
                           empty-icon="mdi-star"
                           full-icon="mdi-star"
-                          half-icon="mdi-star-half-full"
+                          half-icon="mdi-star-half"
                           half-increments
                           readonly
                           background-color="grey lighten-2"
-                          color="yellow accent-3"
+                          color="orange accent-3"
                           size="35"
                         ></v-rating>
                       
@@ -57,7 +57,7 @@
                 </v-flex>
 
                 
-                    <v-layout row xs12 class="pa-4" align-end>
+                    <v-layout row xs12 class="pa-4 mt-10" align-end>
                       <v-layout>
                         <v-flex v-for="(value, key) in hotel.amenities" :key="value" shrink class="mx-2">
                             <v-tooltip bottom>
@@ -70,7 +70,7 @@
                       </v-layout> <!-- amenities ends -->
 
                         <v-flex>
-                          R {{hotel.price}} <i>p/d</i>
+                          <h4 class="display-1"><b class="green--text text--lighten-1">R {{hotel.price}} </b><i class="small">p/d</i></h4>
                         </v-flex>
                           
                         <v-layout xs12 md12 lg4 justify-end> 
@@ -135,6 +135,10 @@
 .slideIn-leave-active {
   transition: all .1 ease;
   
+}
+
+.small {
+  font-size: 16px;
 }
 
 </style>
