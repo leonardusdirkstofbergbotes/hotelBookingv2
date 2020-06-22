@@ -67,86 +67,26 @@
       </v-layout>
       
       <v-layout row wrap>
-        <v-flex xs12 sm6 lg4 class="mb-4">
+        <v-flex xs12 sm6 lg4 class="mb-4" v-for="top in featured" :key="top.id">
           <v-card class="mx-auto" max-width="290">
             <v-img class="white--text align-end" height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+              :src="top.imageSrc"
             >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
             </v-img>
 
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-            
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
+            <v-card-title>{{top.name}}</v-card-title>
+            <v-card-subtitle class="pb-0 mb-2">{{top.location}}</v-card-subtitle>
             
             <v-card-actions>
-
-              <v-btn @click="viewHotel('01')" color="orange" text>
+              <v-spacer></v-spacer>
+              <v-btn @click="viewHotel(top.id)" color="primary" text>
                 Explore
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
 
-        <v-flex xs12 sm6 lg4 class="mb-4">
-          <v-card class="mx-auto" max-width="290">
-            <v-img class="white--text align-end" height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
-            </v-img>
-
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn color="orange" text>
-                Share
-              </v-btn>
-
-              <v-btn color="orange" text>
-                Explore
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-
-        <v-flex xs12 lg4 class="mb-4">
-          <v-card class="mx-auto" max-width="290">
-            <v-img class="white--text align-end" height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
-            </v-img>
-
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
-
-            <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-
-              <div>Whitsunday Island, Whitsunday Islands</div>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn color="orange" text>
-                Share
-              </v-btn>
-
-              <v-btn color="orange" text>
-                Explore
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-flex>
+        
       </v-layout>
     </v-container>
 
@@ -169,6 +109,14 @@
 
 <script>
   export default {
+    created() {
+    this.$store.dispatch('getHotels')
+    this.$store.dispatch('getFeatured')
+  },
+
+  mounted() {
+    console.log('mounted')
+  },
     data() {
       return {
         inputRules: [
@@ -190,6 +138,10 @@
         return this.$store.getters.loading
       },
 
+      featured () {
+        return this.$store.getters.getFeat
+      },
+
       countHotels () {
         return this.$store.getters.countHotels
       }
@@ -209,9 +161,6 @@
             adults: this.adults,
             dateIn: this.dateIn,
             dateOut: this.dateOut
-          }
-          if (this.countHotels === 0) {
-            this.$store.dispatch('getHotels')
           }
           
           this.$store.dispatch('updateStatus', searchData)
@@ -239,6 +188,10 @@
           
       }
 
+    },
+
+    destroyed() {
+      console.log('destroyed')
     }
   }
 </script>

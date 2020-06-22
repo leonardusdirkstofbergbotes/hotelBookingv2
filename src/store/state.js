@@ -9,6 +9,8 @@ export const store = new Vuex.Store({
         loading: false,
 
         hotels: [],
+        
+        featured: [],
 
         status: [],
 
@@ -38,11 +40,19 @@ export const store = new Vuex.Store({
         },
 
         storeHotels (state, payload) {
-            state.hotels.push(payload)
+            if (state.hotels.length < 15) {
+                state.hotels.push(payload)
+            }
         },
 
         setDays (state, payload) {
             state.days = payload
+        },
+
+        storeFeatured (state, payload) {
+            if (state.featured.length < 3) {
+                state.featured.push(payload)
+            }  
         }
     },
     actions: {
@@ -122,6 +132,21 @@ export const store = new Vuex.Store({
             commit('setLoading', false)
         },
 
+        getFeatured ({commit}) {
+            firebase.firestore().collection('hotels').where('rating', '>=', 4.5).limit(3).get().then(snapshot => { 
+                snapshot.docs.forEach(doc => {
+                    const pack = {
+                        name: doc.data().name,
+                        imageSrc: doc.data().imageSrc,
+                        location: doc.data().location,
+                        rating: doc.data().rating,
+                        id: doc.id
+                    }
+                    commit('storeFeatured', pack)
+                })
+            })
+        },
+
         calcDays ({commit}, payload) {
             const date1 = new Date(payload.date1);
             const date2 = new Date(payload.date2);
@@ -134,6 +159,10 @@ export const store = new Vuex.Store({
     getters: {
         hotelArr (state) {
             return state.hotels
+        },
+
+        getFeat (state) {
+            return state.featured
         },
 
         countHotels (state) {
