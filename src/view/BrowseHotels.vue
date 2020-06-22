@@ -17,11 +17,11 @@
         <h1 class="display-1">Showing results for <b class="display-2">{{status[0].location}}</b></h1>
       </v-flex>
 
+      <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
+          </v-progress-circular> <!-- Loading circle -->
+
       <transition-group appear name="slideIn">
         <v-layout xs12 row wrap class="grey lighten-4 rounded-lg pa-3 my-8" v-for="hotel in getHotels" :key="hotel.id"> <!-- Individual hotel wrapper -->
-         
-          <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
-          </v-progress-circular> <!-- Loading circle -->
           
           <v-flex xs12 md6 lg3> <!-- Image of the hotel -->
              <v-img lazy-src="@/assets/load.gif" class="white--text align-end" :src="hotel.imageSrc" min-height="300px">

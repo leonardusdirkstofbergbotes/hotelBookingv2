@@ -16,7 +16,7 @@ export const store = new Vuex.Store({
 
         user: [],
 
-        signedIn: ''
+        signedIn: []
 
     },
     mutations: {
@@ -26,8 +26,7 @@ export const store = new Vuex.Store({
         },
 
         addUser (state, payload) {
-            state.user.length = 0
-            state.user.push(payload)
+            state.signedIn = payload
         },
 
         signUser (state, payload) {
@@ -65,7 +64,11 @@ export const store = new Vuex.Store({
             firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
                 .then(response => { // authorise user and get auth uid
                     var uid = response.user.uid
-                    commit('signUser', uid)
+                    firebase.database().ref("users/" + uid).once('value')
+                        .then(data => {
+                            console.log(data.val())
+                            commit('signUser', data.val())
+                        })
                     commit('setLoading', false)
                 }).catch(error =>{
                     console.log(error)
@@ -82,11 +85,13 @@ export const store = new Vuex.Store({
             commit('setLoading', true)
             firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
                 .then(response => {
+                    let uid = response.user.uid
                     const newUser = {
                         name: payload.name,
                         email: payload.email,
                         uid: response.user.uid
                     }
+                    firebase.database().ref('users/' + uid).set(newUser)
                     commit('addUser', newUser)
                     commit('setLoading', false)
                 }).catch(error => {
@@ -132,10 +137,6 @@ export const store = new Vuex.Store({
 
         countHotels (state) {
             return state.hotels.length
-        },
-
-        getUser (state) {
-            return state.user
         },
 
         signed (state) {
