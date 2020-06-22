@@ -117,8 +117,9 @@ export const store = new Vuex.Store({
                     }
                     commit('storeHotels', pack)
                 })
-                commit('setLoading', false)
+                
             }) //firestore query ends
+            commit('setLoading', false)
         },
 
         calcDays ({commit}, payload) {

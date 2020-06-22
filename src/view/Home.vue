@@ -1,9 +1,5 @@
 <template>
   <div>
-
-    <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
-    </v-progress-circular> <!-- Loading circle -->
-
     <v-container>
       <v-layout justify-center row wrap class="mb-1 pa-4">
         <v-flex xs12> <!-- Heading -->

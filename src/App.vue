@@ -26,6 +26,22 @@ export default {
     FOoter
   },
 
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
+
+  watch: {
+    loading (value) {
+      if (value == true) {
+        document.body.style.cursor='wait';
+      } else {
+        document.body.style.cursor='default';
+      }
+    }
+  },
+
   data: () => ({
     
   })

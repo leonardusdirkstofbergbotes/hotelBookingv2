@@ -210,7 +210,7 @@ export default {
                 this.userName = value.name
                 this.signUp = false
                 this.logIn = false
-            } else if (value === null) {
+            } else if (value == null || value == undefined) {
                 this.loggedIn = false
             }
         }
@@ -237,7 +237,6 @@ export default {
 
         logOut() {
             this.$store.dispatch('logout')
-            this.loggedIn = false
         }
     }
 }
