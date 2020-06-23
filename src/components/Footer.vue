@@ -6,7 +6,9 @@
       </v-card-text>
 
       <v-card-text class="grey--text pt-0" id="here">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Hotel monkey is an online accomodation site that offers you the best hotels in South Africa. Every hotel has its own unique taste with different 
+        amenities included such as indoor and outdoor swimming pools, bar area, indoor and outdoor lounges, gyms, entertainment areas and spas etc. 
+        Our site is easy to use with basic online tools to guide you on your journey in booking a hotel.  
       </v-card-text>
 
       <v-divider></v-divider>

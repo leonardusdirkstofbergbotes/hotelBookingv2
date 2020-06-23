@@ -56,6 +56,7 @@ export const store = new Vuex.Store({
         }
     },
     actions: {
+
         updateStatus ({commit}, payload) {
             commit('setLoading', true)
             const info = {
@@ -133,7 +134,7 @@ export const store = new Vuex.Store({
         },
 
         getFeatured ({commit}) {
-            firebase.firestore().collection('hotels').where('rating', '>=', 4.5).limit(3).get().then(snapshot => { 
+            firebase.firestore().collection('hotels').where('rating', '>=', 5).limit(3).get().then(snapshot => { 
                 snapshot.docs.forEach(doc => {
                     const pack = {
                         name: doc.data().name,
@@ -157,6 +158,7 @@ export const store = new Vuex.Store({
 
     },
     getters: {
+
         hotelArr (state) {
             return state.hotels
         },

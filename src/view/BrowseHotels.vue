@@ -1,6 +1,6 @@
 <template>
     <v-container>
-
+    
       <v-layout row wrap justify-space-between elevation-1 class="pa-2 mb-16 rounded-lg light-blue lighten-5" style="position: relative;">
         <v-flex xs12 class="my-1">
           <h1 class="display-1">Your search status</h1>
@@ -14,10 +14,79 @@
         <h1 class="display-1">Showing results for <b class="display-2">{{status[0].location}}</b></h1>
       </v-flex>
 
+    <v-menu
+      v-model="menu"
+      :close-on-content-click="false"
+      :nudge-width="200"
+      offset-x
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="orange" dark v-bind="attrs" v-on="on">
+          Filter
+        </v-btn>
+      </template>
+
+      <v-card>
+        <v-list>
+          <v-list-item>
+            <v-list-item-avatar>
+              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title>John Leider</v-list-item-title>
+              <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle>
+            </v-list-item-content>
+
+            <v-list-item-action>
+              <v-btn
+                :class="fav ? 'red--text' : ''"
+                icon
+                @click="fav = !fav"
+              >
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
+
+        <v-divider></v-divider>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-action>
+              <v-switch v-model="message" color="purple"></v-switch>
+            </v-list-item-action>
+            <v-list-item-title>Enable messages</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-action>
+              <v-switch v-model="hints" color="purple"></v-switch>
+            </v-list-item-action>
+            <v-list-item-title>Enable hints</v-list-item-title>
+          </v-list-item>
+        </v-list>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn text @click="menu = false">Cancel</v-btn>
+          <v-btn color="primary" text @click="menu = false">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-menu>
+
       <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
           </v-progress-circular> <!-- Loading circle -->
 
-      <transition-group appear name="slideIn">
+
+<v-flex v-for="items in filters" :key="items">
+            <v-flex v-for="item in items" :key="item">
+              {{item.name}}
+            </v-flex>
+          </v-flex>
+      <transition-group appear name="slideIn" v-if="filt === false">
         <v-layout xs12 row wrap class="grey lighten-4 rounded-lg pa-3 my-8" v-for="hotel in getHotels" :key="hotel.id"> <!-- Individual hotel wrapper -->
           
           <v-flex xs12 md6 lg3> <!-- Image of the hotel -->
@@ -78,7 +147,9 @@
             </v-layout>
           </v-flex>
 
+
         </v-layout>
+        
       </transition-group>
       
       
@@ -87,6 +158,12 @@
 
 <script>
   export default {
+    data () {
+      return {
+        filters: [],
+        filt: false
+      }
+    },
 
     props: ['location'],
     computed: {
@@ -107,6 +184,15 @@
     methods: {
       carousel (id) {
         this.$router.push('/hotel/' + id)
+      },
+
+      filterResults () {
+        this.filters.length = 0 // empties the array first to add new filters
+        var result = this.getHotels.filter(function(obj) {
+          return obj.price === 380
+        })
+        this.filters.push(result)
+        this.filt = true
       }
     }
   }

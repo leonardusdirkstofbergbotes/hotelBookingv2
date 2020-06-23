@@ -110,6 +110,7 @@
 <script>
   export default {
     created() {
+      console.log(document.title)
     this.$store.dispatch('getHotels')
     this.$store.dispatch('getFeatured')
   },
