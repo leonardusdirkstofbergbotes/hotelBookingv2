@@ -7,7 +7,6 @@ import Profile from '@/view/User/Profile'
 
 
 Vue.use(VueRouter)
-
   const routes = [
   {
     path: '/',
@@ -33,7 +32,8 @@ Vue.use(VueRouter)
   }
 ]
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 
 export default router
