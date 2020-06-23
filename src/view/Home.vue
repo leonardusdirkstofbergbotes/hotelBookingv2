@@ -1,5 +1,28 @@
 <template>
   <div>
+    <v-card width="100vw" height="70vh" class="mb-11">
+      <v-img class="white--text align-end" height="100%" src="@/assets/front.jpg">
+        <v-card-title class="display-2 customBack">
+          Hotel Booking made simple
+        </v-card-title>
+      </v-img>
+    </v-card>
+
+    <v-layout column class="mb-12 pa-1">
+      <h1 class="display-3 text-center mb-2">Why choose us</h1>
+      <v-layout row justify-space-around>
+
+        <v-flex class="text-center" xs6 sm4 md4 shrink v-for="reason in reasons" :key="reason">
+          <v-avatar color="orange" class="pa1" size="150">
+            <span class="white--text headline">{{reason}}</span>
+          </v-avatar>
+        </v-flex>
+
+      </v-layout>
+
+    </v-layout>
+
+
     <v-container>
       <v-layout justify-center row wrap class="mb-1 pa-4">
         <v-flex xs12> <!-- Heading -->
@@ -120,6 +143,9 @@
   },
     data() {
       return {
+        reasons: [
+          'Easy booking process', 'Great user experience', 'Best rated hotels'
+        ],
         inputRules: [
           v => v.length >= 3 || 'Make sure to fill in this part'
         ],
@@ -198,6 +224,17 @@
 </script>
 
 <style scoped>
+#hero {
+    width: 100vw;
+    height: 70vh;
+    background-image: url('../assets/front.webp');
+    background-size: cover;
+    background-position-y: center;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
 
 #searchBar {
   margin-top: 80px;
@@ -206,5 +243,9 @@
 
 .customWrap {
   justify-content: space-evenly;
+}
+
+.customBack {
+  background-color: rgba(66, 168, 251, 0.719);
 }
 </style>

@@ -18,6 +18,7 @@
 import NAvbar from '@/components/Navbar'
 import FOoter from '@/components/Footer'
 
+
 export default {
   name: 'App',
 

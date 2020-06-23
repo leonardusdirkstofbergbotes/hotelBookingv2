@@ -1,9 +1,6 @@
 <template>
     <v-app-bar
-      color="blue lighten-5 accent-4"
-      dense
-      dark
-    >
+      color="light-blue" dense dark>
         <v-btn icon to="/">
             <v-icon>fa-home</v-icon>
         </v-btn>
