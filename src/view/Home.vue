@@ -121,10 +121,12 @@
           </v-flex>
         </v-layout>
 
-      <v-layout row wrap class="mx-5 mb-15 rounded-lg customWrap"  elevation-4> 
-          <v-btn text ripple v-for="area in locations" @click="goTo(area)" style="cursor: pointer;" width="200px" :key="area" class="pa-10">
-            {{area}}
-          </v-btn>
+      <v-layout row wrap class="mb-15 rounded-lg"  elevation-4> 
+          <v-flex xs6 sm4 lg3 v-for="area in locations" :key="area" shrink class="text-center">
+            <v-btn text ripple  @click="goTo(area)" style="cursor: pointer;" class="pa-5">
+              {{area}}
+            </v-btn>
+          </v-flex>
       </v-layout>
     </v-container>
   </div>

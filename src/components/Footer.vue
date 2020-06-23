@@ -11,23 +11,13 @@
         </v-btn>
       </v-card-title>
 
-      <v-layout row wrap grey lighten-1>
-        <v-flex xs12 sm9>
-          <v-card-text class="text-center primary--text customSize">
+        <v-flex class="pa-1 grey">
+          <v-card-text class="text-center white--text customSize">
             Hotel monkey is an online accomodation site that offers you the best hotels in South Africa. Every hotel has its own unique taste with different 
             amenities included such as indoor and outdoor swimming pools, bar area, indoor and outdoor lounges, gyms, entertainment areas and spas etc. 
             Our site is easy to use with basic online tools to guide you on your journey in booking a hotel.
           </v-card-text>
         </v-flex>
-
-        <v-layout row>
-
-          <v-flex xs4 sm12 v-for="option in payments" :key="option">
-            <v-icon>{{option}}</v-icon>
-          </v-flex>
-
-        </v-layout>
-      </v-layout>
 
       <v-card-text class="py-2 white--text text-center caption">
         {{ new Date().getFullYear() }} — <strong>Leonardus Botes</strong>
@@ -46,10 +36,6 @@
         'mdi-twitter',
         'mdi-linkedin',
         'mdi-instagram',
-      ],
-
-      payments: [
-        'fa-paypal', 'fa-credit-card', 'fa-google-wallet'
       ]
     })
   }
