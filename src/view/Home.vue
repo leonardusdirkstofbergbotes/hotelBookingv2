@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card width="100vw" height="70vh" class="mb-11">
-      <v-img class="white--text align-end" height="100%" src="@/assets/front.jpg">
+      <v-img class="white--text align-end" height="100%" src="@/assets/front.webp">
         <v-card-title class="display-2 customBack">
           Hotel Booking made simple
         </v-card-title>
@@ -224,17 +224,6 @@
 </script>
 
 <style scoped>
-#hero {
-    width: 100vw;
-    height: 70vh;
-    background-image: url('../assets/front.webp');
-    background-size: cover;
-    background-position-y: center;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-}
-
 
 #searchBar {
   margin-top: 80px;
