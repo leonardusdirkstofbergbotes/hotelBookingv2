@@ -141,6 +141,7 @@ export const store = new Vuex.Store({
                         imageSrc: doc.data().imageSrc,
                         location: doc.data().location,
                         rating: doc.data().rating,
+                        amenities: doc.data().amenities,
                         id: doc.id
                     }
                     commit('storeFeatured', pack)

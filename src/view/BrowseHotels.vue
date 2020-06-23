@@ -13,12 +13,8 @@
         <h1 class="display-1">Showing results for <b class="display-2">{{status[0].location}}</b></h1>
       </v-flex>
 
-    <v-menu
-      v-model="menu"
-      :close-on-content-click="false"
-      :nudge-width="200"
-      offset-x
-    >
+  <v-layout row justify-end class="pa-2">
+    <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="orange" dark v-bind="attrs" v-on="on">
           Filter
@@ -33,17 +29,9 @@
               <v-list-item-title> Maximum Price?
                 <v-spacer></v-spacer>
                 <span class="display-3 font-weight-light mr-1">R</span>
-                <span
-                  class="display-3 font-weight-light"
-                  v-text="slider"
-                ></span>
+                <span class="display-3 font-weight-light" v-text="slider"></span>
               </v-list-item-title>
-              <v-slider
-                v-model="slider"
-                thumb-label
-                :min="min" 
-                :max="max"
-              ></v-slider>
+              <v-slider v-model="slider" :min="min" :max="max"></v-slider>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -54,15 +42,14 @@
         <v-btn color="primary" text @click="filterResults">Set Filter</v-btn>
       </v-card>
     </v-menu>
+  </v-layout>
 
       <v-progress-circular indeterminate class="primary--text" width="7" size="70" v-if="loading">
           </v-progress-circular> <!-- Loading circle -->
 
-
+        <transition name="filterView">
           <v-flex v-for="items in filters" :key="items"> <!-- Filtered results-->
             
-              
-
               <v-layout xs12 row wrap class="grey lighten-4 rounded-lg pa-3 my-8" v-for="item in items" :key="item"> <!-- Individual hotel wrapper -->
           
           <v-flex xs12 md6 lg3> <!-- Image of the hotel -->
@@ -126,6 +113,7 @@
 
         </v-layout>
           </v-flex>
+        </transition>
 
 
       <transition-group appear name="slideIn" v-if="filt === false">
@@ -281,6 +269,22 @@
 
 .small {
   font-size: 16px;
+}
+
+.filterView-enter-active, .view-leave-active {
+  transition: opacity 0.5s ease-in-out
+}
+
+.filterView-enter, .view-leave-to {
+  opacity: 0;
+}
+
+.filterView-enter-active {
+  transition-delay: 0.5s;
+}
+
+.filterView-enter-to, .view-leave {
+  opacity: 1;
 }
 
 </style>

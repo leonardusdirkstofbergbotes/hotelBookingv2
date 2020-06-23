@@ -92,15 +92,20 @@
       <v-layout row wrap>
         <v-flex xs12 sm6 lg4 class="mb-4" v-for="top in featured" :key="top.id">
           <v-card class="mx-auto" max-width="290">
-            <v-img class="white--text align-end" height="200px"
-              :src="top.imageSrc"
-            >
-            </v-img>
+            <v-img class="white--text align-end" height="200px" :src="top.imageSrc"></v-img>
 
             <v-card-title>{{top.name}}</v-card-title>
             <v-card-subtitle class="pb-0 mb-2">{{top.location}}</v-card-subtitle>
             
             <v-card-actions>
+              <v-flex v-for="(value, key) in top.amenities" :key="value" shrink class="mx-1">
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon size="15" v-bind="attrs" v-on="on">{{key}}</v-icon>
+                    </template>
+                    <span>{{value}}</span>
+                  </v-tooltip>
+              </v-flex>
               <v-spacer></v-spacer>
               <v-btn @click="viewHotel(top.id)" color="primary" text>
                 Explore

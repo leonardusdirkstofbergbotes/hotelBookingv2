@@ -1,34 +1,43 @@
 <template>
     <v-container>
-        <v-layout column> <!-- single hotel wrapper (stacks) -->
+        <v-layout column class="mt-5 mb-14"> <!-- single hotel wrapper (stacks) -->
 
-            <v-flex>
+            <v-flex class="mb-2">
                 <h1 class="display-3">{{hotel.name}}</h1>
             </v-flex>
 
             <v-flex xs12>
-                <v-carousel>
+                <v-carousel cycle="4000" class="rounded-lg">
                     <v-carousel-item v-for="(value, key) in hotel.carouselItems" :key="key" :src="value">
                     </v-carousel-item>
                 </v-carousel>
             </v-flex>
-
-            <v-flex>
-                {{hotel.location}}
-            </v-flex>
             
-            <v-flex>
-                {{hotel.info}}
+            <v-layout wrap class="my-3 pa-1">
+
+            <v-flex xs12 sm6 lg3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3294.3142077488496!2d19.007320314980507!3d-34.34248055122884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcdd9dccaf23b01%3A0xd99af027e1e23165!2s21%20Neethling%20St%2C%20Kleinmond%2C%207195!5e0!3m2!1sen!2sza!4v1592935764814!5m2!1sen!2sza" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>            
             </v-flex>
 
+            <v-flex xs12 sm6 lg9 class="px-5">
+                <v-layout column>
+                    <v-flex>
+                        {{hotel.info}}
+                    </v-flex>
+
+                </v-layout>
+
+            </v-flex>
+            </v-layout>
             
+
 
             <v-dialog
       v-model="book"
       width="500"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on">Book</v-btn>
+        <v-btn color="success" v-bind="attrs" v-on="on">Book</v-btn>
       </template>
 
       <v-card>
