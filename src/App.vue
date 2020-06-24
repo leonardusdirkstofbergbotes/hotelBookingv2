@@ -50,6 +50,11 @@ export default {
 </script>
 
 <style>
+
+html, body {
+  scroll-behavior: smooth;
+}
+
 .view-enter-active, .view-leave-active {
   transition: opacity 0.5s ease-in-out
 }

@@ -13,7 +13,7 @@
       <v-layout row justify-space-around>
 
         <v-flex class="text-center" xs6 sm4 md4 shrink v-for="reason in reasons" :key="reason">
-          <v-avatar color="orange" class="pa1" size="150">
+          <v-avatar color="orange" class="pa1" size="140">
             <span class="white--text headline pa-3">{{reason}}</span>
           </v-avatar>
         </v-flex>
@@ -92,7 +92,7 @@
       <v-layout row wrap>
         <v-flex xs12 sm6 lg4 class="mb-4" v-for="top in featured" :key="top.id">
           <v-card class="mx-auto" max-width="290">
-            <v-img class="white--text align-end" height="200px" :src="top.imageSrc"></v-img>
+            <v-img lazy-src="@/assets/load.gif" class="white--text align-end" height="200px" :src="top.imageSrc"></v-img>
 
             <v-card-title>{{top.name}}</v-card-title>
             <v-card-subtitle class="pb-0 mb-2">{{top.location}}</v-card-subtitle>

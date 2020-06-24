@@ -24,7 +24,6 @@
                     <v-flex>
                         {{hotel.info}}
                     </v-flex>
-
                 </v-layout>
 
             </v-flex>

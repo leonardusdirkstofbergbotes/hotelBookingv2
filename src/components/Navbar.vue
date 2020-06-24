@@ -5,26 +5,24 @@
             <v-icon>fa-home</v-icon>
         </v-btn>
         <v-toolbar-title>
-          <router-link to="/" style="cursor: pointer" tag="span">Brand comes here</router-link>
+          <router-link to="/" style="cursor: pointer" tag="span">Hotel Monkey</router-link>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
         <v-toolbar-items>
-        <v-btn text link href="#foot">
+        <v-btn icon link href="#foot">
             <v-icon left>fa-address-book</v-icon>
-            Contact us
         </v-btn>
 
          <v-dialog
       v-model="signUp"
       width="500"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ on, attrs }"  v-if="loggedIn === false">
 
-        <v-btn text v-if="loggedIn === false" v-bind="attrs" v-on="on">
+        <v-btn icon v-bind="attrs" v-on="on">
             <v-icon left>fa-user-plus</v-icon>
-            Sign up
         </v-btn>
 
       </template>
@@ -108,9 +106,8 @@
     >
       <template v-slot:activator="{ on, attrs }">
 
-        <v-btn text v-if="loggedIn === false" v-bind="attrs" v-on="on">
+        <v-btn icon v-if="loggedIn === false" v-bind="attrs" v-on="on">
             <v-icon left>fa-user-check</v-icon>
-            Login
         </v-btn>
 
       </template>
@@ -188,6 +185,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
     data () {
         return {
@@ -200,7 +199,7 @@ export default {
             loggedIn: false,
             userName: '',
             nameRules: [
-              v => v.length < 1 || "Please fill in this field"
+              v => v.length > 1 || "Please fill in this field"
             ],
             emailRules: [
               v => !!v || 'E-mail is required',
@@ -232,23 +231,51 @@ export default {
     watch: {
       signUpErrors (value) {
         if (value == 'auth/invalid-email') {
-          alert("The email you have entered is badly formatted.  Make sure to type the email correctly")
+          Swal.fire(
+          'The email you have entered is badly formatted',
+          'Make sure to type the email correctly', 
+          'info'
+          )
         } else if (value == 'auth/email-already-in-use') {
-          alert('The email address is already in use by another account. Sign up with a different email adress')
+            Swal.fire(
+            'The email address is already in use by another account',
+            'Sign up with a different email adress', 
+            'info'
+          )
         } else if (value == 'auth/weak-password') {
-          alert('Make sure that your password is atleast 6 or more characters long')
+            Swal.fire(
+              'Password is too short',
+              'Make sure that your password is atleast 6 or more characters long', 
+              'info'
+            )
         }
       },
 
       errors (value) {
         if (value == 'auth/wrong-password') {
-          alert('Your password is wrong. Please try again')
+            Swal.fire(
+                'Your password is wrong',
+                'Please try again', 
+                'error'
+              )
         } else if (value == 'auth/invalid-email') {
-          alert("Please make sure that you typed the email correctly")
+          Swal.fire(
+                'Invalid email adress',
+                'Please make sure that you typed the email correctly', 
+                'info'
+              )
         } else if (value == 'auth/user-not-found') {
-          alert ('The email adress you entered is not a registered account.  Please try again or alternatively register for an account')
+          Swal.fire(
+                'The email adress you entered is not a registered account',
+                'Please try again or alternatively register for an account', 
+                'info'
+              )
         } else if (value == 'auth/too-many-requests') {
-          alert ('You have made to many request. Please Try again later')
+          Swal.fire(
+                'You have made to many request',
+                'Please Try again later', 
+                'error'
+              )
         }
       },
 
