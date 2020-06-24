@@ -113,8 +113,7 @@
         <v-card-title
           class="headline grey lighten-2"
           primary-title
-        >
-          Login
+        >Login
         </v-card-title>
 
         <v-form @submit.prevent="handleLogin">
@@ -182,6 +181,7 @@
 export default {
     data () {
         return {
+            error: '',
             userName: '',
             userEmail: '',
             userPassword: '',
@@ -192,6 +192,10 @@ export default {
         }
     },
     computed: {
+        errors () {
+          return this.$store.getters.getLoginErrors
+        },
+
         signedIn () {
             return this.$store.getters.signed
         },
@@ -202,6 +206,18 @@ export default {
     },
 
     watch: {
+      errors (value) {
+        if (value == 'auth/wrong-password') {
+          alert('Your password is wrong. Please try again')
+        } else if (value == 'auth/invalid-email') {
+          alert("Please make sure that you typed the email correctly")
+        } else if (value == 'auth/user-not-found') {
+          alert ('The email adress you entered is not a registered account.  Please try again or alternatively register for an account')
+        } else if (value == 'auth/too-many-requests') {
+          alert ('You have made to many request. Please Try again later')
+        }
+      },
+
         signedIn (value) {
             console.log(value)
             if (value !== null) {

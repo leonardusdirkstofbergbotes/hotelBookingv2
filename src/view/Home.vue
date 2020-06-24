@@ -14,7 +14,7 @@
 
         <v-flex class="text-center" xs6 sm4 md4 shrink v-for="reason in reasons" :key="reason">
           <v-avatar color="orange" class="pa1" size="150">
-            <span class="white--text headline">{{reason}}</span>
+            <span class="white--text headline pa-3">{{reason}}</span>
           </v-avatar>
         </v-flex>
 
