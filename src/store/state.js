@@ -7,20 +7,14 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         loading: false,
-
         hotels: [],
-        
         featured: [],
-
         status: [],
-
         days: 1,
-
         user: [],
-
         signedIn: [],
-
-        loginErrors: ''
+        loginErrors: '',
+        signUpErrors: ''
 
     },
     mutations: {
@@ -58,8 +52,11 @@ export const store = new Vuex.Store({
         },
 
         storeLoginErrors (state, payload) {
-            state.loginErrors = ''
             state.loginErrors = payload
+        },
+
+        storeSignUpErrors (state, payload) {
+            state.signUpErrors = payload
         }
     },
     actions: {
@@ -114,7 +111,9 @@ export const store = new Vuex.Store({
                     commit('addUser', newUser)
                     commit('setLoading', false)
                 }).catch(error => {
-                    console.log(error)
+                    console.log(error.code)
+                    var code = error.code
+                    commit('storeSignUpErrors', code)
                     commit('setLoading', false)
                 })
         },
@@ -170,6 +169,10 @@ export const store = new Vuex.Store({
 
         getLoginErrors (state) {
             return state.loginErrors
+        },
+
+        getSignUpErrors (state) {
+            return state.signUpErrors
         },
 
         hotelArr (state) {

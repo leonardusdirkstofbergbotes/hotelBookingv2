@@ -47,6 +47,7 @@
                         label="Your Name"
                         id="name"
                         v-model="userName"
+                        :rules="nameRules"
                     ></v-text-field>
                 </v-flex>
 
@@ -57,6 +58,7 @@
                         id="email"
                         v-model="userEmail"
                         type="email"
+                        :rules="emailRules"
                     ></v-text-field>
                 </v-flex>
 
@@ -67,6 +69,7 @@
                         id="password"
                         v-model="userPassword"
                         type="password"
+                        :rules="passwordRules"
                     ></v-text-field>
                 </v-flex>
 
@@ -127,6 +130,8 @@
                         id="email"
                         v-model="userEmail"
                         type="email"
+                        :rules="emailRules"
+                        required
                     ></v-text-field>
                 </v-flex>
 
@@ -137,6 +142,7 @@
                         id="password"
                         v-model="userPassword"
                         type="password"
+                        :rules="passwordRules"
                     ></v-text-field>
                 </v-flex>
 
@@ -188,12 +194,26 @@ export default {
             signUp: false,
             logIn: false,
             loggedIn: false,
-            userName: ''
+            userName: '',
+            nameRules: [
+              v => v.length < 1 || "Please fill in this field"
+            ],
+            emailRules: [
+              v => !!v || 'E-mail is required',
+              v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            ],
+            passwordRules: [
+              v => v.length < 6 || 'Password must be atleast 6 characters long'
+            ]
         }
     },
     computed: {
         errors () {
           return this.$store.getters.getLoginErrors
+        },
+
+        signUpErrors () {
+          return this.$store.getters.getSignUpErrors
         },
 
         signedIn () {
@@ -206,6 +226,16 @@ export default {
     },
 
     watch: {
+      signUpErrors (value) {
+        if (value == 'auth/invalid-email') {
+          alert("The email you have entered is badly formatted.  Make sure to type the email correctly")
+        } else if (value == 'auth/email-already-in-use') {
+          alert('The email address is already in use by another account. Sign up with a different email adress')
+        } else if (value == 'auth/weak-password') {
+          alert('Make sure that your password is atleast 6 or more characters long')
+        }
+      },
+
       errors (value) {
         if (value == 'auth/wrong-password') {
           alert('Your password is wrong. Please try again')
