@@ -48,6 +48,7 @@
                         id="name"
                         v-model="userName"
                         :rules="nameRules"
+                        required
                     ></v-text-field>
                 </v-flex>
 
@@ -59,6 +60,7 @@
                         v-model="userEmail"
                         type="email"
                         :rules="emailRules"
+                        required
                     ></v-text-field>
                 </v-flex>
 
@@ -70,6 +72,7 @@
                         v-model="userPassword"
                         type="password"
                         :rules="passwordRules"
+                        required
                     ></v-text-field>
                 </v-flex>
 
@@ -143,6 +146,7 @@
                         v-model="userPassword"
                         type="password"
                         :rules="passwordRules"
+                        required
                     ></v-text-field>
                 </v-flex>
 
@@ -203,7 +207,7 @@ export default {
               v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
             ],
             passwordRules: [
-              v => v.length < 6 || 'Password must be atleast 6 characters long'
+              v => v.length > 6 || 'Password must be atleast 6 characters long'
             ]
         }
     },
