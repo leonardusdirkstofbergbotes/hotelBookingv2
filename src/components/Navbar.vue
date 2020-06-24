@@ -85,7 +85,7 @@
             text
             @click="signUp = false, logIn = true"
           >
-            Already have an account?
+            Have an account?
           </v-btn>
 
             <v-spacer></v-spacer>
@@ -158,7 +158,7 @@
             text
             @click="logIn = false, signUp = true"
           >
-            Dont have an account yet?
+            Dont have an account?
           </v-btn>
 
         <v-spacer></v-spacer>
