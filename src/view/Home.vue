@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card width="100vw" height="70vh" class="mb-11">
-      <v-img class="white--text align-end" height="100%" src="@/assets/front.webp">
+      <v-img lazy-src="@/assets/lazyFront.jpg" class="white--text align-end" height="100%" src="@/assets/front.webp">
         <v-card-title class="display-2 customBack">
           Hotel Booking made simple
         </v-card-title>
